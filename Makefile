@@ -47,6 +47,7 @@ all: $(PROJECT) test
 clean:
 	rm -f *.o
 
+
 cleanall: clean
 	rm -f $(PROJECT)
 	rm -f $(LIBPROJECT)
