@@ -51,4 +51,3 @@
 - The game updates progression and unlocks new content.
 - If the match ends in a draw, no rewards are granted.
 
-This structure ensures **clear, predictable, and balanced gameplay mechanics** while maintaining system stability and modularity.

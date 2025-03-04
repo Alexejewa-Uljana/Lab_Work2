@@ -36,6 +36,3 @@ This game is a **turn-based card RPG**. The core components include **player mec
     - **`MagicCard`** – Uses mana for special abilities.
     - **`SpecialCard`** – Unique mechanics that change gameplay.
     - **`StatusEffectCard`** – Applies status effects to enemies or the player.
-
-## **Summary**  
-This system ensures **modularity**, making it easy to expand and balance game mechanics. 

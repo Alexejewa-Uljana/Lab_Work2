@@ -31,19 +31,3 @@ The goal of the testing plan is to ensure the correctness and reliability of the
   Test that winning a battle correctly updates the player's skill tree, inventory, and rewards system.
 
 ---
-
-## **3. Test Strategy**
-
-### **3.1 Player Initialization Tests**  
-These tests will verify that the `Player` object is correctly initialized, with proper values for health, mana, and deck state.
-
-### **3.2 Card Play Tests**  
-These tests will verify that cards are correctly played, the required mana is deducted, and the effects of the cards (e.g., damage, healing, or buffs) are applied correctly.
-
-### **3.3 AI Behavior Tests**  
-These tests will verify that the AI-controlled enemies make valid decisions based on the cards they have in their deck and the current game state. The AI should play optimally or follow predefined strategies.
-
----
-
-## **4. Conclusion**  
-The testing plan will ensure that all critical systems of the game, such as the combat mechanics, card interactions, and AI behavior, are functioning as expected. Through unit and integration tests using **Google Test**, we will verify that each component of the game behaves correctly and integrates smoothly, providing a reliable and stable gameplay experience.
