@@ -12,6 +12,7 @@ public:
     DefenseCard(int power);
     void play() override;
     void claimReward(Player& player) override;
+    int getDefensePower() const;
 
 private:
     int defenseValue;

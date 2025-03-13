@@ -15,6 +15,7 @@ public:
     void display() const; // cout szie of cards
     void addCard(std::unique_ptr<Card> card); // Add card in the end of deck
     void initializeDeck(); // add 3 cards in Deck for start game
+    bool isEmpty();
 private:
     std::vector<std::unique_ptr<Card>> cards; // set of cards
 };

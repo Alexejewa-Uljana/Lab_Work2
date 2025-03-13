@@ -35,3 +35,7 @@ void Deck::addCard(std::unique_ptr<Card> card) {
     cards.push_back(std::move(card));
     std::cout << "Card added to deck.\n";
 }
+
+bool Deck::isEmpty() {
+    return cards.size() == 0;
+}

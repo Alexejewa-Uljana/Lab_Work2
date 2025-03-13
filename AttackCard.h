@@ -12,6 +12,7 @@ public:
     AttackCard(int power); // name always use "Attack card"
     void play() override;
     void claimReward(Player& player) override;
+    int getAttackPower() const;
 
 private:
     int attackPower;

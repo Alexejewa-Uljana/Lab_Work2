@@ -1,48 +1,31 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() {
+Game::Game()
+    : player(), enemy(), deck(), battleSystem(), turnManager(player, enemy), storyManager(), world() {
     deck.initializeDeck();
 }
 
 void Game::start() {
+    showStoryAndWorldInfo();
+
     std::cout << "Game has started!" << std::endl;
     showGameStatus();
     while (player.getHP() > 0 && enemy.getHP() > 0) {
-        playTurn();
+        turnManager.startTurn();
+        showGameStatus();
     }
-}
-
-void Game::playTurn() {
-    playerTurn();
-    if (player.getHP() > 0 && enemy.getHP() > 0) {
-        enemyTurn();
-    }
-    showGameStatus();
-}
-
-void Game::playerTurn() {
-    std::cout << "Your turn!" << std::endl;
-    player.showHand();
-    int cardIndex;
-    std::cout << "Enter the index of the card you want to play: ";
-    std::cin >> cardIndex;
-
-    if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
-        player.playCard(cardIndex, enemy);
-        playerClaimRewards(cardIndex);
-        drawNewCardForPlayer();
+    if (player.getHP() <= 0) {
+        std::cout << "You lost the game!" << std::endl;
     } else {
-        std::cout << "Invalid card index. Skipping turn.\n";
+        std::cout << "You won the game!" << std::endl;
     }
 }
 
-void Game::enemyTurn() {
-    enemy.attack(player, 10);
-}
-
-void Game::addCardToDeck(std::unique_ptr<Card> newCard) {
-    deck.addCard(std::move(newCard));
+void Game::showStoryAndWorldInfo() {
+    storyManager.showStory();
+    world.load();
+    std::cout << "Current level: " << world.getLevel() << std::endl;
 }
 
 void Game::showGameStatus() const {
@@ -68,10 +51,4 @@ void Game::refillDeck() {
     deck.addCard(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", 10)));
 }
 
-void Game::playerClaimRewards(int cardIndex) {
-    if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
-        player.getHand()[cardIndex]->claimReward(player);
-    } else {
-        std::cout << "Invalid card index for rewards!" << std::endl;
-    }
-}
+

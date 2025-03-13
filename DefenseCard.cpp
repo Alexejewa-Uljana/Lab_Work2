@@ -13,3 +13,7 @@ void DefenseCard::claimReward(Player& player) {
     std::cout << "You received a bonus to defense power!\n";
     player.restoreHealth(10);
 }
+
+int DefenseCard::getDefensePower() const {
+    return defenseValue;
+}

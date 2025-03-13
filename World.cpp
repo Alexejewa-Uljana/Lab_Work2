@@ -4,6 +4,12 @@
 World::World() : level(1) {}
 
 void World::load() {
-    std::cout << "World loaded, level: " << level << std::endl;
+    std::cout << "Loading world...\n";
+    std::cout << "Current level: " <<  level << ".\n";
 }
+
+int World::getLevel() const {
+    return level;
+}
+
 

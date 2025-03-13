@@ -2,6 +2,7 @@
 #define STORY_MANAGER_H
 
 #include <string>
+#include <iostream>
 
 class StoryManager {
 public:
@@ -11,7 +12,8 @@ public:
 
 private:
     int currentChapter;
+    void displayIntro();
+    void displayRules();
 };
 
 #endif
-

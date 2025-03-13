@@ -13,3 +13,7 @@ void AttackCard::claimReward(Player& player) {
     std::cout << "You received a bonus to attack power!\n";
     player.increaseAttackPower(5);
 }
+
+int AttackCard::getAttackPower() const {
+    return attackPower;
+}

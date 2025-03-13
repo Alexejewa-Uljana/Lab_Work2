@@ -1,9 +1,9 @@
 #ifndef BATTLESYSTEM_H
 #define BATTLESYSTEM_H
 
-#include "TurnManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "TurnManager.h"
 
 class BattleSystem {
 public:

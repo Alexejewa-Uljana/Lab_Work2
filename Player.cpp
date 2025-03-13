@@ -27,7 +27,7 @@ void Player::showHand() const {
         return;
     }
     for (size_t i = 0; i < hand.size(); ++i) {
-        std::cout << i + 1 << ". ";
+        std::cout << i << ". ";
         hand[i]->play();
     }
 }
@@ -107,11 +107,16 @@ void Player::takeDamage(int damage) {
 }
 
 void Player::drawCards() {
-    for (int i = 0; i < 3; ++i) {
-        if (deck) {
+    int cardsToDraw = 3 - hand.size();
+    for (int i = 0; i < cardsToDraw; ++i) {
+        if (deck and !deck->isEmpty()) {
             auto drawnCard = deck->drawCard();
             if (drawnCard) {
                 hand.push_back(std::move(drawnCard));
+            }
+            else {
+                std::cout << "No more cards in the deck!\n";
+                break;
             }
         }
     }
@@ -151,4 +156,8 @@ void Player::addCardToDeck(std::unique_ptr<Card> card) {
 void Player::reduceMana(int amount) {
     mana -= amount;
     if (mana < 0) mana = 0;
+}
+
+void Player::removeCard(int index) {
+    if (index >= 0 and index < hand.size()) hand.erase(hand.begin() + index);
 }

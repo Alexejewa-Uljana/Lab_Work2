@@ -31,13 +31,14 @@ public:
     const std::vector<std::unique_ptr<Card>>& getHand() const;
     void reduceMana(int amount);
     void setStunned(int turns);
+    void removeCard(int index);
+    void drawCards();
 private:
     int hp;
     int mana;
     int attackPower;
     std::unique_ptr<Deck> deck;
     std::vector<std::unique_ptr<Card>> hand;
-    void drawCards();
     int stunnedTurns = 0;
 };
 

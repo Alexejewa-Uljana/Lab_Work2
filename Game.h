@@ -1,33 +1,37 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <memory>
 #include "Player.h"
 #include "Enemy.h"
 #include "Deck.h"
+#include "BattleSystem.h"
+#include "TurnManager.h"
+#include "StoryManager.h"
+#include "World.h"
+#include "Card.h"
 #include "AttackCard.h"
 #include "DefenseCard.h"
 #include "MagicCard.h"
-#include "StatusEffectCard.h"
+#include "Effect.h"
 #include "SpecialCard.h"
+#include "StatusEffectCard.h"
 
 class Game {
 public:
     Game();
     void start();
-    void playTurn();
-    void addCardToDeck(std::unique_ptr<Card> newCard);
-    void showGameStatus() const;
-
 private:
     Player player;
     Enemy enemy;
     Deck deck;
+    BattleSystem battleSystem;
+    TurnManager turnManager;
+    StoryManager storyManager;
+    World world;
+    void showGameStatus() const;
     void drawNewCardForPlayer();
-    void playerTurn();
-    void enemyTurn();
     void refillDeck();
-    void playerClaimRewards(int cardIndex);
+    void showStoryAndWorldInfo();
 };
 
 #endif
