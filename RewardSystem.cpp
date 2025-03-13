@@ -12,7 +12,7 @@ void RewardSystem::giveReward(Player& player) {
         reward = std::make_unique<AttackCard>(10);
         std::cout << "You received an Attack Card!" << std::endl;
     } else if (randomReward == 1) {
-        reward = std::make_unique<MagicCard>(20);
+        reward = std::make_unique<MagicCard>(20, 5);
         std::cout << "You received a Magic Card!" << std::endl;
     } else {
         reward = std::make_unique<DefenseCard>(15);

@@ -23,7 +23,7 @@ void Game::playTurn() {
 
 void Game::playerTurn() {
     std::cout << "Your turn!" << std::endl;
-    player.showHand(); 
+    player.showHand();
     int cardIndex;
     std::cout << "Enter the index of the card you want to play: ";
     std::cin >> cardIndex;
@@ -31,11 +31,10 @@ void Game::playerTurn() {
     if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
         player.playCard(cardIndex, enemy);
         playerClaimRewards(cardIndex);
+        drawNewCardForPlayer();
     } else {
-        std::cout << "Invalid card index. Skipping turn." << std::endl;
+        std::cout << "Invalid card index. Skipping turn.\n";
     }
-
-    drawNewCardForPlayer();
 }
 
 void Game::enemyTurn() {
@@ -64,7 +63,7 @@ void Game::drawNewCardForPlayer() {
 void Game::refillDeck() {
     deck.addCard(std::make_unique<AttackCard>(5));
     deck.addCard(std::make_unique<DefenseCard>(5));
-    deck.addCard(std::make_unique<MagicCard>(5));
+    deck.addCard(std::make_unique<MagicCard>(5, 5));
 }
 
 void Game::playerClaimRewards(int cardIndex) {

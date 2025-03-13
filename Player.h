@@ -25,6 +25,7 @@ public:
     void restoreHealth(int amount);
     void addCardToDeck(std::unique_ptr<Card> card);
     const std::vector<std::unique_ptr<Card>>& getHand() const;
+    void reduceMana(int amount);
 private:
     int hp;
     int mana;

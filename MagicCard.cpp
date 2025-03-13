@@ -2,7 +2,9 @@
 #include "Player.h"
 #include <iostream>
 
-MagicCard::MagicCard(int power): Card("Magic Card", power) {}
+MagicCard::MagicCard(int power, int _manaCost): Card("Magic Card", power) {
+    manaCost = _manaCost;
+}
 
 MagicCard::MagicCard(): Card("Magic Card", 5) {}
 
@@ -13,4 +15,8 @@ void MagicCard::play() {
 void MagicCard::claimReward(Player& player) {
     std::cout << "You received a bonus to mana!\n";
     player.restoreMana(10);
+}
+
+int MagicCard::getManaCost() const {
+    return manaCost;
 }

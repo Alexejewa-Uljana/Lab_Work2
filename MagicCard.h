@@ -5,14 +5,17 @@
 #include <iostream>
 #include "Player.h"
 
-class Player;
+//class Player;
 
 class MagicCard : public Card {
 public:
-    MagicCard(int power);
+    MagicCard(int power, int _manaCost);
     MagicCard();
+    int getManaCost() const;
     void play() override;
     void claimReward(Player& player) override;
+private:
+    int manaCost;
 };
 
 #endif

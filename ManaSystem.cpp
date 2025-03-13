@@ -1,20 +1,17 @@
 #include "ManaSystem.h"
 #include <iostream>
 
-ManaSystem::ManaSystem() : mana(10) {}
+bool ManaSystem::canCastMagicCard(Player& player, MagicCard* magicCard) {
+    if (!magicCard) return false;
+    return player.getMana() >= magicCard->getManaCost();
+}
 
-void ManaSystem::useMana(int amount) {
-    if (mana >= amount) {
-        mana -= amount;
+void ManaSystem::castMagicCard(Player& player, MagicCard* magicCard) {
+    if (canCastMagicCard(player, magicCard)) {
+        int manaCost = magicCard->getManaCost();
+        player.reduceMana(manaCost);
+        std::cout << "Mana reduced by " << manaCost << ". Remaining: " << player.getMana() << std::endl;
     } else {
-        std::cout << "Not enough mana!" << std::endl;
+        std::cout << "Not enough mana to play this card!" << std::endl;
     }
-}
-
-void ManaSystem::restoreMana(int amount) {
-    mana += amount;
-}
-
-int ManaSystem::getMana() const {
-    return mana;
 }

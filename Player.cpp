@@ -1,6 +1,8 @@
 #include "Player.h"
 #include <iostream>
 #include "Enemy.h"
+// #include "MagicCard.h"
+#include "ManaSystem.h"
 
 Player::Player() : hp(50), mana(10), attackPower(5) {
     drawCards();
@@ -22,9 +24,21 @@ void Player::playCard(int index, Enemy& enemy) {
         std::cout << "Invalid choice!" << std::endl;
         return;
     }
+    std::unique_ptr<Card>& selectedCard = hand[index];
+    MagicCard* magicCard = dynamic_cast<MagicCard*>(selectedCard.get());
+    if (magicCard) {
+        if(!ManaSystem::canCastMagicCard(*this, magicCard)) {
+            std::cout << "Not enough mana to play this card!\n";
+            return;
+        }
+        else {
+            ManaSystem::castMagicCard(*this, magicCard);
+        }
+    }
 
-    hand[index]->play();
+    selectedCard->play();
     enemy.takeDamage(10);
+
     hand.erase(hand.begin() + index);
 }
 
@@ -90,4 +104,9 @@ void Player::restoreHealth(int amount) {
 
 void Player::addCardToDeck(std::unique_ptr<Card> card) {
     deck.addCard(std::move(card));
+}
+
+void Player::reduceMana(int amount) {
+    mana -= amount;
+    if(mana < 0) mana = 0;
 }

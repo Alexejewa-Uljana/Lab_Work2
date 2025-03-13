@@ -1,15 +1,13 @@
 #ifndef MANASYSTEM_H
 #define MANASYSTEM_H
 
+#include "MagicCard.h"
+#include "Player.h"
+
 class ManaSystem {
 public:
-    ManaSystem();
-    void useMana(int amount);
-    void restoreMana(int amount);
-    int getMana() const;
-
-private:
-    int mana;
+    static bool canCastMagicCard(Player& player, MagicCard* magicCard);
+    static void castMagicCard(Player& player, MagicCard* magicCard);
 };
 
 #endif

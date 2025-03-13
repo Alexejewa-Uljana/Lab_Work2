@@ -11,7 +11,7 @@ Deck::Deck() {
 void Deck::initializeDeck() {
     cards.push_back(std::make_unique<AttackCard>(5));
     cards.push_back(std::make_unique<DefenseCard>(5));
-    cards.push_back(std::make_unique<MagicCard>(5));
+    cards.push_back(std::make_unique<MagicCard>(5, 5));
 }
 
 std::unique_ptr<Card> Deck::drawCard() {
