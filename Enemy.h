@@ -10,6 +10,7 @@ class Player;
 
 class Enemy {
 public:
+    Enemy();
     Enemy(const std::string& _name, int _hp);
     std::string getName() const;
     int getHP() const;

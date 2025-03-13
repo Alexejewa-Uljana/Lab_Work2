@@ -1,34 +1,76 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : player(), enemy("Goblin", 30) {}
-
-void Game::start() {
-    std::cout << "Game started!" << std::endl;
-    battle();
+Game::Game() {
+    deck.initializeDeck();
 }
 
-void Game::battle() {
-    std::cout << "Battle begins between Player and " << enemy.getName() << "!" << std::endl;
-
+void Game::start() {
+    std::cout << "Game has started!" << std::endl;
+    showGameStatus();
     while (player.getHP() > 0 && enemy.getHP() > 0) {
-        std::cout << "Player's turn." << std::endl;
-        player.showHand();
-        if (player.getHandSize() > 0) {
-            int choice;
-            std::cout << "Choose a card to play (1-" << player.getHandSize() << "): ";
-            std::cin >> choice;
-            player.playCard(choice - 1, enemy);
-        }
-        if (enemy.getHP() <= 0) {
-            std::cout << "Enemy defeated!" << std::endl;
-            break;
-        }
+        playTurn();
+    }
+}
 
-        std::cout << enemy.getName() << "'s turn." << std::endl;
-        enemy.takeTurn(player);
-        if (player.getHP() <= 0) {
-            std::cout << "Player defeated!" << std::endl;
-        }
+void Game::playTurn() {
+    playerTurn();
+    if (player.getHP() > 0 && enemy.getHP() > 0) {
+        enemyTurn();
+    }
+    showGameStatus();
+}
+
+void Game::playerTurn() {
+    std::cout << "Your turn!" << std::endl;
+    player.showHand(); 
+    int cardIndex;
+    std::cout << "Enter the index of the card you want to play: ";
+    std::cin >> cardIndex;
+
+    if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
+        player.playCard(cardIndex, enemy);
+        playerClaimRewards(cardIndex);
+    } else {
+        std::cout << "Invalid card index. Skipping turn." << std::endl;
+    }
+
+    drawNewCardForPlayer();
+}
+
+void Game::enemyTurn() {
+    enemy.attack(player, 10);
+}
+
+void Game::addCardToDeck(std::unique_ptr<Card> newCard) {
+    deck.addCard(std::move(newCard));
+}
+
+void Game::showGameStatus() const {
+    std::cout << "Player HP: " << player.getHP() << ", Mana: " << player.getMana() << std::endl;
+    std::cout << "Enemy HP: " << enemy.getHP() << std::endl;
+    deck.display();
+}
+
+void Game::drawNewCardForPlayer() {
+    auto newCard = deck.drawCard();
+    if (newCard) {
+        player.addCard(std::move(newCard));
+    } else {
+        refillDeck();
+    }
+}
+
+void Game::refillDeck() {
+    deck.addCard(std::make_unique<AttackCard>(5));
+    deck.addCard(std::make_unique<DefenseCard>(5));
+    deck.addCard(std::make_unique<MagicCard>(5));
+}
+
+void Game::playerClaimRewards(int cardIndex) {
+    if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
+        player.getHand()[cardIndex]->claimReward(player);
+    } else {
+        std::cout << "Invalid card index for rewards!" << std::endl;
     }
 }

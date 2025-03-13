@@ -4,14 +4,13 @@
 #include <iostream>
 
 class Player;
-class Enemy;
 
 class Card {
 public:
     Card(const std::string& _name, int _power);
     virtual ~Card();
-    std::string getName() const;
-    int getPower() const;
+    std::string getName() const; // getter name
+    int getPower() const; // getter power
     virtual void play() = 0;
     virtual void claimReward(Player& player) = 0;
 private:

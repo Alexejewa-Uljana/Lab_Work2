@@ -5,6 +5,7 @@
 MagicCard::MagicCard(int power): Card("Magic Card", power) {}
 
 MagicCard::MagicCard(): Card("Magic Card", 5) {}
+
 void MagicCard::play() {
     std::cout << "Played a Magic Card! You cast a powerful spell.\n";
 }

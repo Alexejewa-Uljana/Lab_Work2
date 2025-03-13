@@ -9,30 +9,25 @@ Deck::Deck() {
 }
 
 void Deck::initializeDeck() {
-    cards.push_back(new AttackCard(5));
-    cards.push_back(new DefenseCard(5));
-    cards.push_back(new MagicCard(5));
+    cards.push_back(std::make_unique<AttackCard>(5));
+    cards.push_back(std::make_unique<DefenseCard>(5));
+    cards.push_back(std::make_unique<MagicCard>(5));
 }
 
-Card* Deck::drawCard() {
+std::unique_ptr<Card> Deck::drawCard() {
     if (!cards.empty()) {
-        Card* drawnCard = cards.back();
+        auto drawnCard = std::move(cards.back());
         cards.pop_back();
         return drawnCard;
     }
-    return nullptr;
+    else return nullptr;
 }
 
 void Deck::display() const {
     std::cout << "Deck contains " << cards.size() << " cards.\n";
 }
 
-void Deck::addCard(Card* card) {
-    if(card) {
-        cards.push_back(card);
-        std::cout << "Card added to deck.\n";
-    }
-    else {
-        std::cout << "Cannot add null card!\n";
-    }
+void Deck::addCard(std::unique_ptr<Card> card) {
+    cards.push_back(std::move(card));
+    std::cout << "Card added to deck.\n";
 }

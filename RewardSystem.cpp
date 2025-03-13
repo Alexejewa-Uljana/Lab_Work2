@@ -1,14 +1,23 @@
 #include "RewardSystem.h"
 #include <iostream>
-#include "cstdlib"
+#include <cstdlib>
+#include <ctime>
 
 void RewardSystem::giveReward(Player& player) {
-    Card* rewardCard = nullptr;
-    int randomChoice = rand() % 3;
-    if(randomChoice == 0) rewardCard = new AttackCard(10);
-    else if(randomChoice == 1) rewardCard = new MagicCard(20);
-    else rewardCard = new DefenseCard(15);
-    std::cout << "Player received a new card!\n";
-    rewardCard->claimReward(player);
-    player.addCardToDeck(rewardCard);
+    srand(static_cast<unsigned>(time(nullptr)));
+    int randomReward = rand() % 3;
+
+    std::unique_ptr<Card> reward;
+    if (randomReward == 0) {
+        reward = std::make_unique<AttackCard>(10);
+        std::cout << "You received an Attack Card!" << std::endl;
+    } else if (randomReward == 1) {
+        reward = std::make_unique<MagicCard>(20);
+        std::cout << "You received a Magic Card!" << std::endl;
+    } else {
+        reward = std::make_unique<DefenseCard>(15);
+        std::cout << "You received a Defense Card!" << std::endl;
+    }
+
+    player.addCardToDeck(std::move(reward));
 }

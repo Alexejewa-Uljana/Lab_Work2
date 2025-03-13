@@ -3,6 +3,7 @@
 #include "AIController.h"
 #include <iostream>
 
+Enemy::Enemy() : hp(30), name("Goblin") {}
 Enemy::Enemy(const std::string& _name, int _hp) : name(_name), hp(_hp), aiController() {}
 
 std::string Enemy::getName() const {
@@ -18,17 +19,17 @@ void Enemy::setHP(int _hp) {
 }
 
 void Enemy::attack(Player& player, int damage) {
-    std::cout << name << " attacks the player with " << damage << " damage!/n";
+    std::cout << name << " attacks the player with " << damage << " damage!\n";
     player.takeDamage(damage);
 }
 
 void Enemy::castSpell(Player& player, int spellDamage) {
-    std::cout << name << " использует магию и наносит " << spellDamage << " урона!\n";
+    std::cout << name << " uses magic and deals damage " << spellDamage << " damage!\n";
     player.takeDamage(spellDamage);
 }
 
 void Enemy::defend(int defenseValue) {
-    std::cout << name << " усиливает свою защиту на " << defenseValue << "!\n";
+    std::cout << name << " strengthens its defenses on  " << defenseValue << "!\n";
     hp += defenseValue;
 }
 
@@ -44,5 +45,3 @@ void Enemy::takeDamage(int damage) {
         std::cout << name << " has been defeated!\n";
     }
 }
-
-
