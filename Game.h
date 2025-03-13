@@ -8,6 +8,8 @@
 #include "AttackCard.h"
 #include "DefenseCard.h"
 #include "MagicCard.h"
+#include "StatusEffectCard.h"
+#include "SpecialCard.h"
 
 class Game {
 public:

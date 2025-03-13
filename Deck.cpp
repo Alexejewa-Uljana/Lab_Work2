@@ -3,6 +3,8 @@
 #include "AttackCard.h"
 #include "DefenseCard.h"
 #include "MagicCard.h"
+#include "StatusEffectCard.h"
+#include "SpecialCard.h"
 
 Deck::Deck() {
     initializeDeck();
@@ -12,6 +14,8 @@ void Deck::initializeDeck() {
     cards.push_back(std::make_unique<AttackCard>(5));
     cards.push_back(std::make_unique<DefenseCard>(5));
     cards.push_back(std::make_unique<MagicCard>(5, 5));
+    cards.push_back(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("stun", 2)));
+    cards.push_back(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", 10)));
 }
 
 std::unique_ptr<Card> Deck::drawCard() {

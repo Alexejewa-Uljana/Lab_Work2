@@ -3,14 +3,14 @@
 
 #include <string>
 
-class Effect {
-public:
-    Effect(std::string name, int value);
-    void applyEffect();
-
-private:
-    std::string name;
+struct Effect {
+    std::string type;
     int value;
+
+    Effect(const std::string& t = "none", int v = 0);
+    void applyEffect();
 };
 
 #endif
+
+

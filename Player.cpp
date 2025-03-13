@@ -1,11 +1,24 @@
 #include "Player.h"
 #include <iostream>
-#include "Enemy.h"
-// #include "MagicCard.h"
 #include "ManaSystem.h"
+#include "StatusEffectCard.h"
+#include "SpecialCard.h"
+#include "Deck.h"
+#include "Enemy.h"
 
 Player::Player() : hp(50), mana(10), attackPower(5) {
+    deck = std::make_unique<Deck>();
     drawCards();
+}
+
+Player::~Player() = default;
+
+void Player::setDeck(std::unique_ptr<Deck> newDeck) {
+    deck = std::move(newDeck);
+}
+
+Deck* Player::getDeck() const {
+    return deck.get();
 }
 
 void Player::showHand() const {
@@ -14,7 +27,7 @@ void Player::showHand() const {
         return;
     }
     for (size_t i = 0; i < hand.size(); ++i) {
-        std::cout << i << ". ";
+        std::cout << i + 1 << ". ";
         hand[i]->play();
     }
 }
@@ -24,26 +37,49 @@ void Player::playCard(int index, Enemy& enemy) {
         std::cout << "Invalid choice!" << std::endl;
         return;
     }
+
     std::unique_ptr<Card>& selectedCard = hand[index];
-    MagicCard* magicCard = dynamic_cast<MagicCard*>(selectedCard.get());
-    if (magicCard) {
-        if(!ManaSystem::canCastMagicCard(*this, magicCard)) {
+
+    if (MagicCard* magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
+        if (!ManaSystem::canCastMagicCard(*this, magicCard)) {
             std::cout << "Not enough mana to play this card!\n";
             return;
-        }
-        else {
+        } else {
             ManaSystem::castMagicCard(*this, magicCard);
+        }
+    }
+
+    if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
+        std::cout << "Applying status effect: " << statusCard->getName() << "\n";
+        if (statusCard->getEffect().type == "stun") {
+            enemy.setStunned(statusCard->getEffect().value);
+        }
+    }
+
+    if (SpecialCard* specialCard = dynamic_cast<SpecialCard*>(selectedCard.get())) {
+        std::cout << "Activating special effect: " << specialCard->getName() << "\n";
+        if (specialCard->getEffect().type == "heal") {
+            heal(specialCard->getEffect().value);
+        } else if (specialCard->getEffect().type == "mana") {
+            restoreMana(specialCard->getEffect().value);
         }
     }
 
     selectedCard->play();
     enemy.takeDamage(10);
-
     hand.erase(hand.begin() + index);
 }
 
+void Player::setStunned(int turns) {
+    stunnedTurns = turns;
+}
+
 void Player::showDeck() const {
-    deck.display();
+    if (deck) {
+        deck->display();
+    } else {
+        std::cout << "Player has no deck.\n";
+    }
 }
 
 void Player::heal(int amount) {
@@ -72,9 +108,11 @@ void Player::takeDamage(int damage) {
 
 void Player::drawCards() {
     for (int i = 0; i < 3; ++i) {
-        auto drawnCard = deck.drawCard();
-        if (drawnCard) {
-            hand.push_back(std::move(drawnCard));
+        if (deck) {
+            auto drawnCard = deck->drawCard();
+            if (drawnCard) {
+                hand.push_back(std::move(drawnCard));
+            }
         }
     }
 }
@@ -103,10 +141,14 @@ void Player::restoreHealth(int amount) {
 }
 
 void Player::addCardToDeck(std::unique_ptr<Card> card) {
-    deck.addCard(std::move(card));
+    if (deck) {
+        deck->addCard(std::move(card));
+    } else {
+        std::cout << "Player has no deck to add cards.\n";
+    }
 }
 
 void Player::reduceMana(int amount) {
     mana -= amount;
-    if(mana < 0) mana = 0;
+    if (mana < 0) mana = 0;
 }

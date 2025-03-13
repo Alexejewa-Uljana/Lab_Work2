@@ -64,6 +64,8 @@ void Game::refillDeck() {
     deck.addCard(std::make_unique<AttackCard>(5));
     deck.addCard(std::make_unique<DefenseCard>(5));
     deck.addCard(std::make_unique<MagicCard>(5, 5));
+    deck.addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("stun", 2)));
+    deck.addCard(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", 10)));
 }
 
 void Game::playerClaimRewards(int cardIndex) {

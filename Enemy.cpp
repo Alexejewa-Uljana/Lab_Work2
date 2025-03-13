@@ -18,9 +18,22 @@ void Enemy::setHP(int _hp) {
     hp = _hp;
 }
 
+bool Enemy::isStunned() {
+    return stunnedTurns > 0;
+}
+
 void Enemy::attack(Player& player, int damage) {
+    if (stunnedTurns > 0) {
+        std::cout << name << "is stunned and cannot attack!\n";
+        stunnedTurns--;
+        return;
+    }
     std::cout << name << " attacks the player with " << damage << " damage!\n";
     player.takeDamage(damage);
+}
+
+void Enemy::setStunned(int turns) {
+    stunnedTurns = turns;
 }
 
 void Enemy::castSpell(Player& player, int spellDamage) {

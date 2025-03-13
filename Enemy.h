@@ -20,12 +20,15 @@ public:
     void takeDamage(int damage);
     void castSpell(Player& player, int spellDamage);
     void defend(int defenseValue);
-
+    void setStunned(int turns);
+    bool isStunned();
 private:
     std::string name;
     int hp;
     EnemyDeck deck;
     AIController aiController;
+    int stunnedTurns = 0;
+    std::vector<std::unique_ptr<Card>> hand;
 };
 
 #endif

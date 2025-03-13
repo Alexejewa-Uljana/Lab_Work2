@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 #include "Card.h"
+#include "Effect.h"
+#include "StatusEffectCard.h"
+#include "SpecialCard.h"
 
 class Deck {
 public:

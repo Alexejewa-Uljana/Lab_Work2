@@ -7,14 +7,18 @@
 #include "Card.h"
 
 class Enemy;
+class Deck;
 
 class Player {
 public:
     Player();
-    void showHand() const; 
-    void playCard(int index, Enemy& enemy); 
-    void showDeck() const; 
+    ~Player();
+    void showHand() const;
+    void playCard(int index, Enemy& enemy);
+    void showDeck() const;
     void heal(int amount);
+    void setDeck(std::unique_ptr<Deck> newDeck);
+    Deck* getDeck() const;
     int getHP() const;
     int getMana() const;
     int getHandSize() const;
@@ -26,13 +30,15 @@ public:
     void addCardToDeck(std::unique_ptr<Card> card);
     const std::vector<std::unique_ptr<Card>>& getHand() const;
     void reduceMana(int amount);
+    void setStunned(int turns);
 private:
     int hp;
     int mana;
     int attackPower;
-    Deck deck;
+    std::unique_ptr<Deck> deck;
     std::vector<std::unique_ptr<Card>> hand;
     void drawCards();
+    int stunnedTurns = 0;
 };
 
 #endif
