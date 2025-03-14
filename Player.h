@@ -14,6 +14,8 @@ public:
     Player();
     ~Player();
     void showHand() const;
+    void setName(const std::string& _name);
+    void setHP(int _hp);
     void playCard(int index, Enemy& enemy);
     void showDeck() const;
     void heal(int amount);

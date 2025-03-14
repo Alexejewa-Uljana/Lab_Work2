@@ -18,6 +18,10 @@ void Enemy::setHP(int _hp) {
     hp = _hp;
 }
 
+int Enemy::getStunnedTurns() const {
+    return stunnedTurns;
+}
+
 bool Enemy::isStunned() {
     return stunnedTurns > 0;
 }

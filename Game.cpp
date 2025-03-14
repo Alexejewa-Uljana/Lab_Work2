@@ -1,9 +1,9 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game()
-    : player(), enemy(), deck(), battleSystem(), turnManager(player, enemy), storyManager(), world() {
-    deck.initializeDeck();
+Game::Game(int difficulty)
+    : player(), battleSystem(difficulty), turnManager(player, battleSystem.getEnemy()), storyManager(), world() {
+    player.getDeck()->initializeDeck();
 }
 
 void Game::start() {
@@ -11,10 +11,12 @@ void Game::start() {
 
     std::cout << "Game has started!" << std::endl;
     showGameStatus();
-    while (player.getHP() > 0 && enemy.getHP() > 0) {
+
+    while (player.getHP() > 0 && battleSystem.getEnemy().getHP() > 0) {
         turnManager.startTurn();
         showGameStatus();
     }
+
     if (player.getHP() <= 0) {
         std::cout << "You lost the game!" << std::endl;
     } else {
@@ -30,12 +32,12 @@ void Game::showStoryAndWorldInfo() {
 
 void Game::showGameStatus() const {
     std::cout << "Player HP: " << player.getHP() << ", Mana: " << player.getMana() << std::endl;
-    std::cout << "Enemy HP: " << enemy.getHP() << std::endl;
-    deck.display();
+    std::cout << "Enemy HP: " << battleSystem.getEnemy().getHP() << std::endl;
+    player.getDeck()->display();
 }
 
 void Game::drawNewCardForPlayer() {
-    auto newCard = deck.drawCard();
+    auto newCard = player.getDeck()->drawCard();
     if (newCard) {
         player.addCard(std::move(newCard));
     } else {
@@ -44,11 +46,7 @@ void Game::drawNewCardForPlayer() {
 }
 
 void Game::refillDeck() {
-    deck.addCard(std::make_unique<AttackCard>(5));
-    deck.addCard(std::make_unique<DefenseCard>(5));
-    deck.addCard(std::make_unique<MagicCard>(5, 5));
-    deck.addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("stun", 2)));
-    deck.addCard(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", 10)));
+    player.getDeck()->initializeDeck();
 }
 
 

@@ -1,15 +1,25 @@
 #ifndef BOSS_AI_H
 #define BOSS_AI_H
 
-#include "Enemy.h"
+#include "Boss.h"
+#include "Player.h"
 
 class BossAI {
 public:
-    BossAI(Enemy& boss);
-    void makeMove(Player* target);
+    // Конструктор и деструктор
+    BossAI(Boss& boss);
+    ~BossAI();
 
+    void takeTurn(Boss& boss, Player& player);
+    void attack(Boss& boss, Player& player);
+    void castSpell(Boss& boss, Player& player);
 private:
-    Enemy& boss;
+    Boss& boss; // Ссылка на босса
+
+    // Приватные методы для принятия решений
+    void makeDecision(Boss& boss, Player& player);
+    void useSpecialAbility(Boss& boss, Player& player);
+    void defend(Boss& boss);
 };
 
-#endif
+#endif // BOSS_AI_H

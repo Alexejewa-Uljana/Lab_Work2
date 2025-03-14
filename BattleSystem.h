@@ -3,11 +3,21 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include "TurnManager.h"
+#include "Boss.h"
 
 class BattleSystem {
+private:
+    int difficulty;  // Уровень сложности (1 - простой, 2 - средний, 3 - сложный)
+    std::unique_ptr<Enemy> enemy;  // Указатель на текущего врага
+
 public:
-    void startBattle(Player& player, Enemy& enemy);
+    BattleSystem(int diff);
+    
+    void setDifficulty(int diff);
+    Enemy& getEnemy();
+    const Enemy& getEnemy() const;
 };
 
-#endif
+#endif // BATTLESYSTEM_H
+
+

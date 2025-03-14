@@ -17,18 +17,19 @@ void Player::setDeck(std::unique_ptr<Deck> newDeck) {
     deck = std::move(newDeck);
 }
 
+void Player::setHP(int _hp) {
+    hp = _hp;
+}
+
 Deck* Player::getDeck() const {
     return deck.get();
 }
 
 void Player::showHand() const {
-    if (hand.empty()) {
-        std::cout << "Your hand is empty!" << std::endl;
-        return;
-    }
-    for (size_t i = 0; i < hand.size(); ++i) {
-        std::cout << i << ". ";
-        hand[i]->play();
+    std::cout << "Yor current hand:\n";
+    for(size_t i = 0; i < hand.size(); ++i) {
+        if(hand[i]) std::cout << i << ". " << hand[i]->getName() << std::endl;
+        else std::cout << i << ". (empty)\n";
     }
 }
 
@@ -38,17 +39,19 @@ void Player::playCard(int index, Enemy& enemy) {
         return;
     }
 
-    std::unique_ptr<Card>& selectedCard = hand[index];
+    std::unique_ptr<Card> selectedCard = std::move(hand[index]); // Перемещаем карту из руки
 
+    // Обработка MagicCard
     if (MagicCard* magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
         if (!ManaSystem::canCastMagicCard(*this, magicCard)) {
-            std::cout << "Not enough mana to play this card!\n";
-            return;
+            std::cout << "Not enough mana!\n";
+            return; // Не удаляем карту, если её нельзя сыграть
         } else {
             ManaSystem::castMagicCard(*this, magicCard);
         }
     }
 
+    // Обработка StatusEffectCard
     if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
         std::cout << "Applying status effect: " << statusCard->getName() << "\n";
         if (statusCard->getEffect().type == "stun") {
@@ -56,6 +59,7 @@ void Player::playCard(int index, Enemy& enemy) {
         }
     }
 
+    // Обработка SpecialCard
     if (SpecialCard* specialCard = dynamic_cast<SpecialCard*>(selectedCard.get())) {
         std::cout << "Activating special effect: " << specialCard->getName() << "\n";
         if (specialCard->getEffect().type == "heal") {
@@ -65,9 +69,11 @@ void Player::playCard(int index, Enemy& enemy) {
         }
     }
 
-    selectedCard->play();
-    enemy.takeDamage(10);
-    hand.erase(hand.begin() + index);
+    selectedCard->play();  // Играем карту
+    enemy.takeDamage(10);  // Наносим урон врагу
+
+    // Удаляем карту из руки
+    removeCard(index);
 }
 
 void Player::setStunned(int turns) {
@@ -159,5 +165,7 @@ void Player::reduceMana(int amount) {
 }
 
 void Player::removeCard(int index) {
-    if (index >= 0 and index < hand.size()) hand.erase(hand.begin() + index);
+    if (index >= 0 and index < hand.size()){
+        hand.erase(hand.begin() + index);
+    }
 }
