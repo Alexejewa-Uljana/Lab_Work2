@@ -3,28 +3,25 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include "Deck.h"
+#include "Boss.h"
 #include "BattleSystem.h"
 #include "TurnManager.h"
-#include "StoryManager.h"
-#include "World.h"
+#include <memory>
 
 class Game {
 private:
     Player player;
     std::unique_ptr<Enemy> enemy;
-    Deck deck;
+    std::unique_ptr<Boss> boss;
     BattleSystem battleSystem;
     std::unique_ptr<TurnManager> turnManager;
-    StoryManager storyManager;
-    World world;
-    int difficulty;
 
 public:
     Game(int difficulty);
     void start();
-    void setDifficulty(int difficulty);
     void showGameStatus() const;
 };
 
 #endif // GAME_H
+
+

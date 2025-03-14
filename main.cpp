@@ -3,7 +3,7 @@
 
 int main() {
     int difficulty;
-    std::cout << "Select difficulty (1 - Easy, 2 - Normal, 3 - Hard): ";
+    std::cout << "Choose difficulty (1 - easy, 2 - normal, 3 - boss fight): ";
     std::cin >> difficulty;
 
     Game game(difficulty);
@@ -11,5 +11,3 @@ int main() {
 
     return 0;
 }
-
-

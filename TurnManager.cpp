@@ -6,28 +6,36 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
-TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs) : player(p), enemy(e), rewardSystem(), battleSystem(bs) {}
+// Конструктор для обычного врага
+TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs) 
+    : player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr) {}
+
+// Конструктор для босса
+TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
+    : player(p), enemy(b), battleSystem(bs), isBossFight(true) {
+    bossAI = new BossAI(b); // Инициализируем BossAI
+}
 
 void TurnManager::startBattle() {
-    std::cout << "Battle begins between you and " << enemy.getName() << "!\n";
-
     while (player.getHP() > 0 && enemy.getHP() > 0) {
-        startTurn();
-
+        playerTurn();
         if (enemy.getHP() > 0) {
             enemyTurn();
         }
     }
-
     if (player.getHP() > 0) {
-        std::cout << "You have defeated " << enemy.getName() << "!\n";
-        rewardSystem.giveReward(player);
+        std::cout << "You defeated the " << enemy.getName() << "!\n";
     } else {
-        std::cout << "You were defeated by " << enemy.getName() << ".\n";
+        std::cout << "You have been defeated...\n";
+    }
+
+    if (bossAI) {
+        delete bossAI; // Освобождаем память
+        bossAI = nullptr;
     }
 }
 
-void TurnManager::startTurn() {
+void TurnManager::playerTurn() {
     std::cout << "It's your turn!" << std::endl;
     player.showHand();
     std::cout << "Select a card to play (enter index): ";
@@ -75,8 +83,15 @@ void TurnManager::startTurn() {
 }
 
 void TurnManager::enemyTurn() {
-    std::cout << enemy.getName() << "'s turn!\n";
-    aiController.makeMove(enemy, player);
+    std::cout << enemy.getName() << "'s turn.\n";
+
+    if (isBossFight && bossAI) {
+        bossAI->takeTurn(dynamic_cast<Boss&>(enemy), player);
+    } else {
+        aiController.makeMove(enemy, player);
+    }
+
+    std::cout << "Player HP: " << player.getHP() << "\n";
 }
 
 void TurnManager::drawNewCardForPlayer() {
@@ -109,5 +124,3 @@ void TurnManager::refillDeck() {
 
     std::cout << "Deck has been refilled with new cards!" << std::endl;
 }
-
-

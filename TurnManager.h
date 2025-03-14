@@ -3,26 +3,31 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "Boss.h"
 #include "BattleSystem.h"
-#include "RewardSystem.h"
 #include "AIController.h"
+#include "BossAI.h"
+#include "RewardSystem.h"
 
 class TurnManager {
 private:
     Player& player;
     Enemy& enemy;
     BattleSystem& battleSystem;
+    AIController aiController;
+    BossAI* bossAI; // Указатель на BossAI (используется только при сражении с боссом)
+    bool isBossFight;
     RewardSystem rewardSystem;
-    AIController aiController; // AI для врага
 
 public:
     TurnManager(Player& player, Enemy& enemy, BattleSystem& battleSystem);
+    TurnManager(Player& player, Boss& boss, BattleSystem& battleSystem);
 
-    void startTurn();
-    void enemyTurn();  // Ход врага через AIController
-    void drawNewCardForPlayer();
+    void startBattle();
+    void playerTurn();
+    void enemyTurn();
     void refillDeck();
-    void startBattle(); // Начало битвы (игровой цикл)
+    void drawNewCardForPlayer();
 };
 
 #endif // TURNMANAGER_H
