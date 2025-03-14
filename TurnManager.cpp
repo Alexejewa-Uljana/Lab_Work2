@@ -6,11 +6,29 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
-TurnManager::TurnManager(Player& p, Enemy& e) : player(p), enemy(e), rewardSystem() {}
+TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs) : player(p), enemy(e), rewardSystem(), battleSystem(bs) {}
+
+void TurnManager::startBattle() {
+    std::cout << "Battle begins between you and " << enemy.getName() << "!\n";
+
+    while (player.getHP() > 0 && enemy.getHP() > 0) {
+        startTurn();
+
+        if (enemy.getHP() > 0) {
+            enemyTurn();
+        }
+    }
+
+    if (player.getHP() > 0) {
+        std::cout << "You have defeated " << enemy.getName() << "!\n";
+        rewardSystem.giveReward(player);
+    } else {
+        std::cout << "You were defeated by " << enemy.getName() << ".\n";
+    }
+}
 
 void TurnManager::startTurn() {
     std::cout << "It's your turn!" << std::endl;
-    
     player.showHand();
     std::cout << "Select a card to play (enter index): ";
     int cardIndex;
@@ -54,6 +72,11 @@ void TurnManager::startTurn() {
 
     player.drawCards();
     rewardSystem.giveReward(player);
+}
+
+void TurnManager::enemyTurn() {
+    std::cout << enemy.getName() << "'s turn!\n";
+    aiController.makeMove(enemy, player);
 }
 
 void TurnManager::drawNewCardForPlayer() {

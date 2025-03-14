@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include "Player.h"
+#include "Enemy.h"
+#include "Deck.h"
 #include "BattleSystem.h"
 #include "TurnManager.h"
 #include "StoryManager.h"
@@ -10,21 +12,19 @@
 class Game {
 private:
     Player player;
+    std::unique_ptr<Enemy> enemy;
+    Deck deck;
     BattleSystem battleSystem;
-    TurnManager turnManager;
+    std::unique_ptr<TurnManager> turnManager;
     StoryManager storyManager;
     World world;
+    int difficulty;
 
 public:
     Game(int difficulty);
-    
     void start();
-    void showStoryAndWorldInfo();
+    void setDifficulty(int difficulty);
     void showGameStatus() const;
-    void drawNewCardForPlayer();
-    void refillDeck();
 };
 
 #endif // GAME_H
-
-

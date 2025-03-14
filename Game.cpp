@@ -1,52 +1,43 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game(int difficulty)
-    : player(), battleSystem(difficulty), turnManager(player, battleSystem.getEnemy()), storyManager(), world() {
-    player.getDeck()->initializeDeck();
+Game::Game(int difficulty) 
+    : player(), deck(), battleSystem(difficulty), storyManager(), world(), difficulty(difficulty) {
+    setDifficulty(difficulty);
+    turnManager = std::make_unique<TurnManager>(player, *enemy, battleSystem);
+    player.setHP(100);
 }
 
 void Game::start() {
-    showStoryAndWorldInfo();
+    std::cout << "Welcome to the game!\n";
 
-    std::cout << "Game has started!" << std::endl;
-    showGameStatus();
+    // Проверяем, есть ли метод showIntro() в StoryManager
+    // Если его нет в StoryManager, либо добавляем его, либо убираем эту строку.
+    // storyManager.showIntro();
 
-    while (player.getHP() > 0 && battleSystem.getEnemy().getHP() > 0) {
-        turnManager.startTurn();
-        showGameStatus();
-    }
+    std::cout << "Battle begins!\n";
+    turnManager->startBattle();
 
-    if (player.getHP() <= 0) {
-        std::cout << "You lost the game!" << std::endl;
+    if (player.getHP() > 0) {
+        std::cout << "You survived this battle. What will you do next?\n";
     } else {
-        std::cout << "You won the game!" << std::endl;
+        std::cout << "Game Over.\n";
     }
 }
 
-void Game::showStoryAndWorldInfo() {
-    storyManager.showStory();
-    world.load();
-    std::cout << "Current level: " << world.getLevel() << std::endl;
+void Game::setDifficulty(int difficulty) {
+    if (difficulty == 1) {
+        enemy = std::make_unique<Enemy>("Goblin", 50);
+    } else if (difficulty == 2) {
+        enemy = std::make_unique<Enemy>("Orc", 75);
+    } else {
+        enemy = std::make_unique<Boss>("Dark Mage", 100);
+    }
 }
 
 void Game::showGameStatus() const {
-    std::cout << "Player HP: " << player.getHP() << ", Mana: " << player.getMana() << std::endl;
-    std::cout << "Enemy HP: " << battleSystem.getEnemy().getHP() << std::endl;
-    player.getDeck()->display();
-}
-
-void Game::drawNewCardForPlayer() {
-    auto newCard = player.getDeck()->drawCard();
-    if (newCard) {
-        player.addCard(std::move(newCard));
-    } else {
-        refillDeck();
-    }
-}
-
-void Game::refillDeck() {
-    player.getDeck()->initializeDeck();
+    std::cout << "Player HP: " << player.getHP() << "\n";
+    std::cout << "Enemy HP: " << enemy->getHP() << "\n";
 }
 
 
