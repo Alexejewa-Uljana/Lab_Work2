@@ -6,17 +6,13 @@
 
 class BossAI {
 public:
-    // Конструктор и деструктор
     BossAI(Boss& boss);
     ~BossAI();
-
     void takeTurn(Boss& boss, Player& player);
     void attack(Boss& boss, Player& player);
     void castSpell(Boss& boss, Player& player);
 private:
-    Boss& boss; // Ссылка на босса
-
-    // Приватные методы для принятия решений
+    Boss& boss;
     void makeDecision(Boss& boss, Player& player);
     void useSpecialAbility(Boss& boss, Player& player);
     void defend(Boss& boss);

@@ -9,7 +9,7 @@ class Player;
 
 class AttackCard : public Card {
 public:
-    AttackCard(int power); // name always use "Attack card"
+    AttackCard(int power);
     void play() override;
     void claimReward(Player& player) override;
     int getAttackPower() const;

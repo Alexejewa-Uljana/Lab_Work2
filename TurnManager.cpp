@@ -6,14 +6,12 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
-// Конструктор для обычного врага
 TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs) 
     : player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr) {}
 
-// Конструктор для босса
 TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
     : player(p), enemy(b), battleSystem(bs), isBossFight(true) {
-    bossAI = new BossAI(b); // Инициализируем BossAI
+    bossAI = new BossAI(b);
 }
 
 void TurnManager::startBattle() {
@@ -25,12 +23,13 @@ void TurnManager::startBattle() {
     }
     if (player.getHP() > 0) {
         std::cout << "You defeated the " << enemy.getName() << "!\n";
-    } else {
+    }
+    else {
         std::cout << "You have been defeated...\n";
     }
 
     if (bossAI) {
-        delete bossAI; // Освобождаем память
+        delete bossAI;
         bossAI = nullptr;
     }
 }
@@ -52,10 +51,12 @@ void TurnManager::playerTurn() {
     if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard.get())) {
         std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
         enemy.takeDamage(attackCard->getPower());
-    } else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard.get())) {
+    }
+    else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard.get())) {
         std::cout << "You defend with " << defenseCard->getPower() << " defense!" << std::endl;
         player.increaseAttackPower(defenseCard->getPower());
-    } else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
+    }
+    else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
         if (player.getMana() >= magicCard->getManaCost()) {
             std::cout << "You cast a spell for " << magicCard->getManaCost() << " mana!" << std::endl;
             player.reduceMana(magicCard->getManaCost());
@@ -64,15 +65,16 @@ void TurnManager::playerTurn() {
             std::cout << "Not enough mana to cast this spell!" << std::endl;
             return;
         }
-    } else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
+    }
+    else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
         player.playCard(cardIndex, enemy);
-    } else {
+    }
+    else {
         std::cout << "Unknown card type!" << std::endl;
         return;
     }
 
     player.removeCard(cardIndex);
-    
     if (player.getDeck()->isEmpty()) {
         std::cout << "No more cards in the deck!\n";
         refillDeck();
@@ -87,7 +89,8 @@ void TurnManager::enemyTurn() {
 
     if (isBossFight && bossAI) {
         bossAI->takeTurn(dynamic_cast<Boss&>(enemy), player);
-    } else {
+    }
+    else {
         aiController.makeMove(enemy, player);
     }
 
@@ -104,7 +107,8 @@ void TurnManager::drawNewCardForPlayer() {
     if (newCard) {
         std::cout << "You drew a new card!" << std::endl;
         player.addCard(std::move(newCard));
-    } else {
+    }
+    else {
         std::cout << "The deck is empty!" << std::endl;
     }
 }

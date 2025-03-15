@@ -5,8 +5,6 @@
 #include <iostream>
 #include "Player.h"
 
-//class Player;
-
 class MagicCard : public Card {
 public:
     MagicCard(int power, int _manaCost);

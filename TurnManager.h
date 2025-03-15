@@ -15,7 +15,7 @@ private:
     Enemy& enemy;
     BattleSystem& battleSystem;
     AIController aiController;
-    BossAI* bossAI; // Указатель на BossAI (используется только при сражении с боссом)
+    BossAI* bossAI;
     bool isBossFight;
     RewardSystem rewardSystem;
 

@@ -7,12 +7,11 @@
 
 class BattleSystem {
 private:
-    int difficulty;  // Уровень сложности (1 - простой, 2 - средний, 3 - сложный)
-    std::unique_ptr<Enemy> enemy;  // Указатель на текущего врага
+    int difficulty;
+    std::unique_ptr<Enemy> enemy;
 
 public:
     BattleSystem(int diff);
-    
     void setDifficulty(int diff);
     Enemy& getEnemy();
     const Enemy& getEnemy() const;

@@ -38,28 +38,21 @@ void Player::playCard(int index, Enemy& enemy) {
         std::cout << "Invalid choice!" << std::endl;
         return;
     }
-
-    std::unique_ptr<Card> selectedCard = std::move(hand[index]); // Перемещаем карту из руки
-
-    // Обработка MagicCard
+    std::unique_ptr<Card> selectedCard = std::move(hand[index]);
     if (MagicCard* magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
         if (!ManaSystem::canCastMagicCard(*this, magicCard)) {
             std::cout << "Not enough mana!\n";
-            return; // Не удаляем карту, если её нельзя сыграть
+            return;
         } else {
             ManaSystem::castMagicCard(*this, magicCard);
         }
     }
-
-    // Обработка StatusEffectCard
     if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
         std::cout << "Applying status effect: " << statusCard->getName() << "\n";
         if (statusCard->getEffect().type == "stun") {
             enemy.setStunned(statusCard->getEffect().value);
         }
     }
-
-    // Обработка SpecialCard
     if (SpecialCard* specialCard = dynamic_cast<SpecialCard*>(selectedCard.get())) {
         std::cout << "Activating special effect: " << specialCard->getName() << "\n";
         if (specialCard->getEffect().type == "heal") {
@@ -68,11 +61,8 @@ void Player::playCard(int index, Enemy& enemy) {
             restoreMana(specialCard->getEffect().value);
         }
     }
-
-    selectedCard->play();  // Играем карту
-    enemy.takeDamage(10);  // Наносим урон врагу
-
-    // Удаляем карту из руки
+    selectedCard->play();
+    enemy.takeDamage(10);
     removeCard(index);
 }
 

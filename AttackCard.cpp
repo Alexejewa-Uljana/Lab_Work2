@@ -2,7 +2,6 @@
 #include "Player.h"
 #include <iostream>
 
-
 AttackCard::AttackCard(int power): Card("Attack Card", power) {}
 
 void AttackCard::play() {

@@ -10,14 +10,14 @@
 
 class Deck {
 public:
-    Deck(); // use initializeDeck
-    std::unique_ptr<Card> drawCard(); // take out card from back of deck
-    void display() const; // cout szie of cards
-    void addCard(std::unique_ptr<Card> card); // Add card in the end of deck
-    void initializeDeck(); // add 3 cards in Deck for start game
+    Deck();
+    std::unique_ptr<Card> drawCard();
+    void display() const;
+    void addCard(std::unique_ptr<Card> card);
+    void initializeDeck();
     bool isEmpty();
 private:
-    std::vector<std::unique_ptr<Card>> cards; // set of cards
+    std::vector<std::unique_ptr<Card>> cards;
 };
 
 #endif
