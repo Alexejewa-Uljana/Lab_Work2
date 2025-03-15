@@ -17,40 +17,34 @@ void BossAI::takeTurn(Boss& boss, Player& player) {
 
 void BossAI::makeDecision(Boss& boss, Player& player) {
     int decision = rand() % 100;
-    if (player.getHP() < player.getHP() * 0.3) {
+
+    int playerLowHPThreshold = player.getHP() * 0.3;
+    int bossLowHPThreshold = boss.getHP() * 0.3;
+
+    if (player.getHP() < playerLowHPThreshold) {
         std::cout << "Player's health is low! Boss is preparing a powerful attack!\n";
         attack(boss, player);
     }
-    else if (boss.getHP() < boss.getHP() * 0.3) {
-        std::cout << "Boss' health is low! Boss is attempting to defend or heal!\n";
-        if (decision < 50) {
-            defend(boss);
-        } else {
-            useSpecialAbility(boss, player);
-        }
+    else if (boss.getHP() < bossLowHPThreshold) {
+        std::cout << "Boss's health is low! He is defending or healing!\n";
+        (decision < 50) ? defend(boss) : useSpecialAbility(boss, player);
     }
     else if (player.getHP() > player.getHP() * 0.7) {
-        std::cout << "Player's health is high! Boss uses special ability!" << std::endl;
+        std::cout << "Player is healthy! Boss uses special ability!\n";
         useSpecialAbility(boss, player);
     }
     else {
-        if (decision < 50) {
-            std::cout << "Boss decides to attack!" << std::endl;
-            attack(boss, player);
-        } else {
-            std::cout << "Boss decides to cast a spell!" << std::endl;
-            castSpell(boss, player);
-        }
+        (decision < 50) ? attack(boss, player) : castSpell(boss, player);
     }
 }
 
 void BossAI::attack(Boss& boss, Player& player) {
-    int damage = 20 + rand() % 20;
+    int damage = 10 + rand() % 10;
     boss.attack(player, damage);
 }
 
 void BossAI::castSpell(Boss& boss, Player& player) {
-    int spellDamage = 30 + rand() % 20;
+    int spellDamage = 20 + rand() % 5;
     boss.castSpell(player, spellDamage);
 }
 
@@ -60,7 +54,7 @@ void BossAI::useSpecialAbility(Boss& boss, Player& player) {
         boss.castSpell(player, -20);
     } else {
         std::cout << "Boss uses damage special ability!\n";
-        boss.attack(player, 50);
+        boss.attack(player, 25);
     }
 }
 

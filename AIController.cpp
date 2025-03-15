@@ -1,38 +1,57 @@
 #include "AIController.h"
-#include "Player.h"
-#include "Enemy.h"
 #include <iostream>
+#include <cstdlib>
 
 AIController::AIController() {}
 
 void AIController::makeMove(Enemy& enemy, Player& player) {
-    int enemyHP = enemy.getHP();
-    int playerHP = player.getHP();
-    if (enemyHP < 15) {
-        if (playerHP < 15) {
-            std::cout << enemy.getName() << " makes the decisive attack!\n";
-            enemy.attack(player, 20);
+    int action = rand() % 3;
+
+    switch (action) {
+        case 0:
+            attackPlayer(enemy, player);
+            break;
+        case 1:
+            useCard(enemy, player);
+            break;
+        case 2:
+            defend(enemy);
+            break;
+    }
+}
+
+void AIController::useCard(Enemy& enemy, Player& player) {
+    std::cout << enemy.getName() << " attempts to use a card!\n";
+    if (enemy.getDeck()) {
+        auto card = enemy.getDeck()->drawCard();
+        if (card) {
+            card->play();
         } else {
-            std::cout << enemy.getName() << " trying to defend himself.\n";
-            enemy.defend(10);
+            std::cout << "No cards available in the deck!\n";
         }
+    }
+}
+
+void AIController::attackPlayer(Enemy& enemy, Player& player) {
+    std::cout << enemy.getName() << " attacks the player!\n";
+    int damage = 10;
+    if (enemy.isStunned()) {
+        std::cout << enemy.getName() << " is stunned and cannot attack!\n";
         return;
     }
-    if (playerHP < 20) {
-        std::cout << enemy.getName() << " uses strong attack!\n";
-        enemy.attack(player, 15);
-        return;
-    }
-    if (enemy.getName() == "Dark Mage") {
-        std::cout << enemy.getName() << " uses a magic spell!\n";
-        enemy.castSpell(player, 12);
-    }
-    else if (enemy.getName() == "Orc") {
-        std::cout << enemy.getName() << " performs a powerful blow!\n";
-        enemy.attack(player, 10);
-    }
-    else {
-        std::cout << enemy.getName() << " attack!\n";
-        enemy.attack(player, 8);
+    player.takeDamage(damage);
+}
+
+void AIController::defend(Enemy& enemy) {
+    std::cout << enemy.getName() << " defends itself!\n";
+    int defenseValue = 5;
+    enemy.defend(defenseValue);
+}
+
+void AIController::simpleAI(Enemy& enemy, Player& player) {
+    if (enemy.getHP() < 15) {
+        defend(enemy);
+    } else {
+        attackPlayer(enemy, player);
     }
 }

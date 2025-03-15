@@ -1,13 +1,25 @@
 #ifndef AICONTROLLER_H
 #define AICONTROLLER_H
 
+#include "Enemy.h"
+#include "Player.h"
+#include "EnemyDeck.h"
+
 class Enemy;
-class Player;
 
 class AIController {
 public:
     AIController();
     void makeMove(Enemy& enemy, Player& player);
+    void useCard(Enemy& enemy, Player& player);
+    void attackPlayer(Enemy& enemy, Player& player);
+    void defend(Enemy& enemy);
+
+private:
+    void simpleAI(Enemy& enemy, Player& player);
 };
 
 #endif
+
+
+

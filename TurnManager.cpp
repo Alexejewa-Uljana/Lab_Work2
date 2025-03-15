@@ -6,7 +6,7 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
-TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs) 
+TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs)
     : player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr) {}
 
 TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
@@ -18,20 +18,35 @@ void TurnManager::startBattle() {
     while (player.getHP() > 0 && enemy.getHP() > 0) {
         playerTurn();
         if (enemy.getHP() > 0) {
-            enemyTurn();
+            if (isBossFight) {
+                bossAI->takeTurn(dynamic_cast<Boss&>(enemy), player);
+            }
+            else {
+                enemyTurn();
+            }
         }
     }
-    if (player.getHP() > 0) {
-        std::cout << "You defeated the " << enemy.getName() << "!\n";
-    }
-    else {
-        std::cout << "You have been defeated...\n";
-    }
-
+    std::cout << ((player.getHP() > 0) ? "You win!" : "You lost...") << std::endl;
     if (bossAI) {
         delete bossAI;
         bossAI = nullptr;
     }
+}
+
+void TurnManager::enemyTurn() {
+    std::cout << enemy.getName() << "'s turn.\n";
+    if(enemy.isStunned()) {
+        std::cout << enemy.getName() << " is stunned and cannot attack this turn!\n";
+        enemy.increaseStunnedTurns();
+        return;
+    }
+    if (isBossFight && bossAI) {
+        bossAI->takeTurn(dynamic_cast<Boss&>(enemy), player);
+    } else {
+        aiController.makeMove(enemy, player);
+    }
+
+    std::cout << "Player HP: " << player.getHP() << "\n";
 }
 
 void TurnManager::playerTurn() {
@@ -67,6 +82,7 @@ void TurnManager::playerTurn() {
         }
     }
     else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
+        std::cout << "You use Special Card/Status Effct Card!\n";
         player.playCard(cardIndex, enemy);
     }
     else {
@@ -79,23 +95,10 @@ void TurnManager::playerTurn() {
         std::cout << "No more cards in the deck!\n";
         refillDeck();
     }
-
     player.drawCards();
     rewardSystem.giveReward(player);
 }
 
-void TurnManager::enemyTurn() {
-    std::cout << enemy.getName() << "'s turn.\n";
-
-    if (isBossFight && bossAI) {
-        bossAI->takeTurn(dynamic_cast<Boss&>(enemy), player);
-    }
-    else {
-        aiController.makeMove(enemy, player);
-    }
-
-    std::cout << "Player HP: " << player.getHP() << "\n";
-}
 
 void TurnManager::drawNewCardForPlayer() {
     if (!player.getDeck()) {

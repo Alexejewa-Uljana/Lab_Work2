@@ -10,6 +10,7 @@
 #include "RewardSystem.h"
 
 class TurnManager {
+
 private:
     Player& player;
     Enemy& enemy;
@@ -31,3 +32,5 @@ public:
 };
 
 #endif // TURNMANAGER_H
+
+
