@@ -64,6 +64,7 @@ void Player::playCard(int index, Enemy& enemy) {
     selectedCard->play();
     enemy.takeDamage(selectedCard->getPower());
     removeCard(index);
+    drawCards();
 }
 
 void Player::setStunned(int turns) {
