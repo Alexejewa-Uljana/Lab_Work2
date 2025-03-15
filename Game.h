@@ -5,6 +5,7 @@
 #include "TurnManager.h"
 #include "StoryManager.h"
 #include "BattleSystem.h"
+#include "Artifact.h"
 
 class Game {
 public:
@@ -17,6 +18,7 @@ private:
     BattleSystem battleSystem;
     Enemy* enemy;
     TurnManager* turnManager;
+    Artifact artifact;
 };
 
 #endif
