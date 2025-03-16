@@ -25,6 +25,10 @@ Deck* Player::getDeck() const {
     return deck.get();
 }
 
+const int Player::getAttackPower() const {
+    return attackPower;
+}
+
 void Player::showHand() const {
     std::cout << "Your current hand:\n";
     for(size_t i = 0; i < hand.size(); ++i) {

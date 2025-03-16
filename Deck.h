@@ -16,6 +16,7 @@ public:
     void addCard(std::unique_ptr<Card> card);
     void initializeDeck();
     bool isEmpty();
+    const int getSize() const;
 private:
     std::vector<std::unique_ptr<Card>> cards;
 };

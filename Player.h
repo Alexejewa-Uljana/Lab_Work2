@@ -34,6 +34,7 @@ public:
     void reduceMana(int amount);
     void setStunned(int turns);
     void removeCard(int index);
+    const int getAttackPower() const;
     void drawCards();
 private:
     int hp;

@@ -19,6 +19,10 @@ void Deck::initializeDeck() {
     cards.push_back(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", rand() % 10 + 5)));
 }
 
+const int Deck::getSize() const {
+    return cards.size();
+}
+
 std::unique_ptr<Card> Deck::drawCard() {
     if (!cards.empty()) {
         auto drawnCard = std::move(cards.back());

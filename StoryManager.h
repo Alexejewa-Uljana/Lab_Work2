@@ -9,8 +9,6 @@ public:
     StoryManager();
     void showStory();
     void nextChapter();
-
-private:
     int currentChapter;
     void displayIntro();
     void displayRules();

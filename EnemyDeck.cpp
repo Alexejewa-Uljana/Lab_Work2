@@ -16,6 +16,10 @@ std::unique_ptr<Card> EnemyDeck::drawCard() {
     return nullptr;
 }
 
+const int EnemyDeck::getSize() const {
+    return deck.size();
+}
+
 void EnemyDeck::initializeDeck() {
     addCard(std::make_unique<AttackCard>(10));
     addCard(std::make_unique<DefenseCard>(7));

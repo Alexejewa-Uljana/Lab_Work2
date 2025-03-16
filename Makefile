@@ -20,7 +20,8 @@ DEPS=$(wildcard *.h)
 
 OBJ= Artifact.o AttackCard.o DefenseCard.o MagicCard.o Card.o Game.o main.o AIController.o BattleSystem.o Boss.o BossAI.o Deck.o Effect.o Enemy.o EnemyDeck.o ManaSystem.o Player.o RewardSystem.o StoryManager.o World.o TurnManager.o StatusEffectCard.o SpecialCard.o
 
-TEST-OBJ=Test.o
+TEST-OBJ=Test.o TestPlayer.o TestAttackCard.o TestMagicCard.o TestDefenseCard.o TestStatusEffectCard.o TestSpecialCard.o TestDeck.o TestEnemyDeck.o TestBoss.o TestStoryManager.o TestEnemy.o TestWorld.o TestArtifact.o TestRewardSystem.o TestManaSystem.o TestEffect.o
+
 
 .PHONY: default
 
