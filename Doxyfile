@@ -1,0 +1,51 @@
+# Project related configuration
+PROJECT_NAME           = "LabWork2"
+PROJECT_BRIEF          = "A brief description of the project"
+PROJECT_LOGO           = ""  # Add a logo path if necessary
+OUTPUT_DIRECTORY       = docs  # Specify the output directory for the docs
+INPUT                  = src Test  # Specify the directories where your source code and tests are located
+FILE_PATTERNS          = *.cpp *.h  # Include all .cpp and .h files
+RECURSIVE              = YES  # If your source is in subdirectories
+EXCLUDE_PATTERNS       =  # You can specify patterns to exclude specific files if necessary
+
+# HTML output settings
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html  # Specify the output folder for HTML documentation
+
+# LaTeX output settings (optional)
+GENERATE_LATEX         = YES  # Uncomment if you want LaTeX documentation
+LATEX_OUTPUT           = latex  # Specify the output folder for LaTeX documentation
+
+# Extraction of documentation
+EXTRACT_ALL            = YES  # Extract documentation for all elements (including private members)
+EXTRACT_PRIVATE        = YES  # Include private members in the documentation
+EXTRACT_STATIC         = YES  # Include static functions and variables in the documentation
+EXTRACT_LOCAL_METHODS  = YES  # Include local functions/methods in the documentation
+SHOW_FILES             = YES  # Show files in the output
+SHOW_INCLUDE_FILES     = YES  # Show the included files in the output
+
+# Generating a class hierarchy diagram (optional)
+CLASS_DIAGRAMS         = YES  # Enable class diagrams
+
+# Enabling comments
+ENABLE_PREPROCESSING   = YES  # Enable preprocessing of input files
+
+# Display source code in documentation (optional)
+SOURCE_BROWSER         = YES  # Enable the display of source code in HTML documentation
+INLINE_SOURCES         = YES  # Show inline source code in the documentation
+
+# Detailed information on functions and variables
+GENERATE_MEMBERGROUPS  = YES  # Generate member groups for classes
+
+# Show header files
+INCLUDE_PATH           = src  # Add path to your header files if necessary
+
+# Miscellaneous
+QUIET                  = NO  # Set to YES to suppress output
+
+# Optional configurations
+HAVE_DOT               = YES  # Enable Graphviz support for diagrams
+DOT_PATH               = /usr/local/bin/dot  # Path to dot if necessary
+
+USE_MDFILE_AS_MAINPAGE = README.md  # Specify if you want to use markdown for main documentation page
+

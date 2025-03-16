@@ -6,18 +6,38 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
+/**
+ * @brief Constructor for TurnManager in a battle with an enemy.
+ * @param p The player.
+ * @param e The enemy.
+ * @param bs The battle system.
+ */
 TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs)
-    : player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr), turnCounter(0) {}
+: player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr), turnCounter(0) {}
 
+/**
+ * @brief Constructor for TurnManager in a battle with a boss.
+ * @param p The player.
+ * @param b The boss.
+ * @param bs The battle system.
+ */
 TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
-    : player(p), enemy(b), battleSystem(bs), isBossFight(true), turnCounter(0){
+: player(p), enemy(b), battleSystem(bs), isBossFight(true), turnCounter(0){
     bossAI = new BossAI(b);
 }
 
+/**
+ * @brief Destructor for TurnManager.
+ * Frees memory used by BossAI.
+ */
 TurnManager::~TurnManager() {
     delete bossAI;
 }
 
+/**
+ * @brief Starts the battle between the player and the enemy or boss.
+ * Includes alternating turns between the player and the enemy.
+ */
 void TurnManager::startBattle() {
     while (player.getHP() > 0 && enemy.getHP() > 0) {
         playerTurn();
@@ -37,9 +57,13 @@ void TurnManager::startBattle() {
     }
 }
 
+/**
+ * @brief Enemy's turn.
+ * Handles the enemy's actions, including card use or attacks.
+ */
 void TurnManager::enemyTurn() {
     std::cout << enemy.getName() << "'s turn.\n";
-    if(enemy.isStunned()) {
+    if (enemy.isStunned()) {
         std::cout << enemy.getName() << " is stunned and cannot attack this turn!\n";
         enemy.increaseStunnedTurns();
         return;
@@ -49,10 +73,13 @@ void TurnManager::enemyTurn() {
     } else {
         aiController.makeMove(enemy, player);
     }
-
     std::cout << "Player HP: " << player.getHP() << "\n";
 }
 
+/**
+ * @brief Player's turn.
+ * The player selects a card from their hand and applies it.
+ */
 void TurnManager::playerTurn() {
     std::cout << "It's your turn!" << std::endl;
     player.showHand();
@@ -89,7 +116,7 @@ void TurnManager::playerTurn() {
         }
     }
     else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
-        std::cout << "You use Special Card/Status Effct Card!\n";
+        std::cout << "You use Special Card/Status Effect Card!\n";
         player.playCard(cardIndex, enemy);
         player.removeCard(cardIndex);
     }
@@ -97,20 +124,27 @@ void TurnManager::playerTurn() {
         std::cout << "Unknown card type!" << std::endl;
         return;
     }
+
     if (player.getDeck()->isEmpty()) {
         std::cout << "No more cards in the deck!\n";
         refillDeck();
     }
+
     player.drawCards();
     turnCounter++;
-    if(turnCounter % 2 == 0) {
+
+    if (turnCounter % 2 == 0) {
         player.restoreMana(4);
-        std::cout << "Every even move you get 4 mama!\n";
+        std::cout << "Every even move you get 4 mana!\n";
     }
+
     rewardSystem.giveReward(player);
 }
 
-
+/**
+ * @brief Draws a new card for the player.
+ * The player receives a card from their deck.
+ */
 void TurnManager::drawNewCardForPlayer() {
     if (!player.getDeck()) {
         std::cout << "No deck assigned to player!" << std::endl;
@@ -118,6 +152,7 @@ void TurnManager::drawNewCardForPlayer() {
     }
 
     auto newCard = player.getDeck()->drawCard();
+
     if (newCard) {
         std::cout << "You drew a new card!" << std::endl;
         player.addCard(std::move(newCard));
@@ -127,6 +162,10 @@ void TurnManager::drawNewCardForPlayer() {
     }
 }
 
+/**
+ * @brief Refills the player's deck with new cards.
+ * Adds new cards to an empty or used deck.
+ */
 void TurnManager::refillDeck() {
     if (!player.getDeck()) {
         std::cout << "No deck assigned to player!" << std::endl;
@@ -138,7 +177,9 @@ void TurnManager::refillDeck() {
     deck->addCard(std::make_unique<DefenseCard>(5));
     deck->addCard(std::make_unique<MagicCard>(5, 5));
     deck->addCard(std::make_unique<SpecialCard>("Health Card", 0, Effect("heal", 5)));
-    deck->addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("Stun", 2)));
+    deck->addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("SStun", 2)));
 
     std::cout << "Deck has been refilled with new cards!" << std::endl;
 }
+
+

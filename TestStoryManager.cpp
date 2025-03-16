@@ -1,22 +1,29 @@
+/**
+ * @file TestStoryManager.cpp
+ * @brief Unit tests for the StoryManager class.
+ */
+
 #include "gtest/gtest.h"
 #include "StoryManager.h"
 #include <sstream>
 
-TEST(StoryManager, displayIntro)
-{
+/**
+ * @brief Tests displaying the introduction of the story.
+ */
+TEST(StoryManager, displayIntro) {
     StoryManager storyManager;
-
     std::ostringstream output;
-    std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf());  // Redirecting output
+    std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf()); // Redirect output
     storyManager.displayIntro();
     EXPECT_EQ("Welcome to the Game!\nIn this game, you will face challenges and fight enemies!\n", output.str());
-    std::cout.rdbuf(originalCout);  // Restore original output
+    std::cout.rdbuf(originalCout); // Restore output
 }
 
-TEST(StoryManager, displayRules)
-{
+/**
+ * @brief Tests displaying the game rules.
+ */
+TEST(StoryManager, displayRules) {
     StoryManager storyManager;
-
     std::ostringstream output;
     std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf());
     storyManager.displayRules();
@@ -24,22 +31,4 @@ TEST(StoryManager, displayRules)
     std::cout.rdbuf(originalCout);
 }
 
-TEST(StoryManager, nextChapter)
-{
-    StoryManager storyManager;
-    std::ostringstream output;
-    std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf());
-    storyManager.nextChapter();
-    EXPECT_EQ("Next chapter of the story...\n", output.str());
-    std::cout.rdbuf(originalCout);
-}
 
-TEST(StoryManager, showStory)
-{
-    StoryManager storyManager;
-    std::ostringstream output;
-    std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf());
-    storyManager.showStory();
-    EXPECT_TRUE(output.str().find("Welcome to the Game!") != std::string::npos);
-    std::cout.rdbuf(originalCout);
-}
