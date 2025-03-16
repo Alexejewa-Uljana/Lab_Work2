@@ -5,9 +5,9 @@
 
 Artifact::Artifact() {
     artifacts = {
-        "Боевой амулет (+5 к атаке)",
-        "Камень жизни (+10 HP)",
-        "Магический шар (+3 маны за ход)"
+        "A battle amulet (+5 attack)",
+        "The stone of life (+10 HP)",
+        "Magic ball (+3 mana)"
     };
 
     srand(static_cast<unsigned>(time(nullptr)));

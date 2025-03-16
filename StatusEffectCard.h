@@ -12,20 +12,12 @@ private:
     Effect effect;
 
 public:
-    StatusEffectCard(const std::string& name, int power, Effect effect)
-        : Card(name, power), effect(effect) {}
+    StatusEffectCard(const std::string& name, int power, Effect effect);
+    void play() override;
 
-    void play() override {
-        std::cout << "Using status effect card: " << getName() << "\n";
-    }
+    void claimReward(Player& player) override ;
 
-    void claimReward(Player& player) override {
-        std::cout << "Claiming reward from: " << getName() << "\n";
-    }
-
-    Effect getEffect() const {
-        return effect;
-    }
+    Effect getEffect() const;
 };
 
 #endif

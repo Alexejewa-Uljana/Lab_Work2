@@ -11,19 +11,10 @@ private:
     Effect effect;
 
 public:
-    SpecialCard(const std::string& name, int power, Effect effect)
-        : Card(name, power), effect(effect) {}
-
-    void play() override {
-        std::cout << "Using special card: " << getName() << "\n";
-    }
-
-    void claimReward(Player& player) override {
-        std::cout << "Claiming special card reward: " << getName() << "\n";
-    }
-    Effect getEffect() const {
-        return effect;
-    }
+    SpecialCard(const std::string& name, int power, Effect effect);
+    void play() override;
+    void claimReward(Player& player) override;
+    Effect getEffect() const;
 };
 
 #endif
