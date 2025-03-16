@@ -19,7 +19,7 @@ private:
     BossAI* bossAI;
     bool isBossFight;
     RewardSystem rewardSystem;
-
+    int turnCounter;
 public:
     TurnManager(Player& player, Enemy& enemy, BattleSystem& battleSystem);
     TurnManager(Player& player, Boss& boss, BattleSystem& battleSystem);

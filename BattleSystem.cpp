@@ -9,7 +9,7 @@ Enemy* BattleSystem::createEnemy() {
     } else if (difficulty == 2) {
         return new Enemy("Orc", 50);
     } else {
-        return new Boss("Dragon", 100);
+        return new Boss("Dark Lord", 100);
     }
 }
 

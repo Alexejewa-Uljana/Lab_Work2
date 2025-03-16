@@ -15,7 +15,7 @@ void Deck::initializeDeck() {
     cards.push_back(std::make_unique<AttackCard>(rand() % 10 + 10));
     cards.push_back(std::make_unique<DefenseCard>(rand() % 10 + 5));
     cards.push_back(std::make_unique<MagicCard>(rand() % 15 + 10, rand() % 5 + 5));
-    cards.push_back(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("stun", rand() % 2 + 1)));
+    cards.push_back(std::make_unique<StatusEffectCard>("Healing Potion", 0, Effect("heal", rand() % 5 + 5)));
     cards.push_back(std::make_unique<SpecialCard>("Healing Potion", 0, Effect("heal", rand() % 10 + 5)));
 }
 

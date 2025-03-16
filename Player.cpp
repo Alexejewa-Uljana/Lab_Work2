@@ -26,9 +26,15 @@ Deck* Player::getDeck() const {
 }
 
 void Player::showHand() const {
-    std::cout << "Yor current hand:\n";
+    std::cout << "Your current hand:\n";
     for(size_t i = 0; i < hand.size(); ++i) {
-        if(hand[i]) std::cout << i << ". " << hand[i]->getName() << ". " << hand[i]->getPower() << std::endl;
+        if(hand[i]) {
+            std::cout << i << ". " << hand[i]->getName() << ". ";
+            if (hand[i]->getPower() != 0) {
+                std::cout <<  "Power: " << hand[i]-> getPower() << std::endl;
+            }
+            else std::cout << std::endl;
+    }
         else std::cout << i << ". (empty)\n";
     }
 }
@@ -63,7 +69,7 @@ void Player::playCard(int index, Enemy& enemy) {
     }
     selectedCard->play();
     enemy.takeDamage(selectedCard->getPower());
-    removeCard(index);
+    //removeCard(index);
     drawCards();
 }
 
