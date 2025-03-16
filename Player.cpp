@@ -11,7 +11,7 @@ Player::Player() : hp(50), mana(10), attackPower(5) {
     drawCards();
 }
 
-Player::~Player() = default;
+Player::~Player() {}
 
 void Player::setDeck(std::unique_ptr<Deck> newDeck) {
     deck = std::move(newDeck);

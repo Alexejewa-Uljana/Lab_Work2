@@ -8,6 +8,7 @@
 class Artifact {
 public:
     Artifact();
+    ~Artifact() = default;
     void grantArtifact(Player& player);
 
 private:

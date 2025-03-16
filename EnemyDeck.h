@@ -10,6 +10,7 @@
 class EnemyDeck {
 public:
     EnemyDeck();
+    ~EnemyDeck();
     void addCard(std::unique_ptr<Card> card);
     std::unique_ptr<Card> drawCard();
     void initializeDeck();

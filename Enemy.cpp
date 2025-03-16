@@ -10,6 +10,7 @@ Enemy::Enemy(const std::string& _name, int _hp) : name(_name), hp(_hp), deck(nul
 
 Enemy::~Enemy() {
     deck = nullptr;
+    delete deck;
 }
 
 void Enemy::takeDamage(int damage) {

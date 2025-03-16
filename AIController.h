@@ -10,6 +10,7 @@ class Enemy;
 class AIController {
 public:
     AIController();
+    ~AIController() = default;
     void makeMove(Enemy& enemy, Player& player);
     void useCard(Enemy& enemy, Player& player);
     void attackPlayer(Enemy& enemy, Player& player);

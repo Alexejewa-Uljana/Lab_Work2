@@ -14,6 +14,10 @@ TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
     bossAI = new BossAI(b);
 }
 
+TurnManager::~TurnManager() {
+    delete bossAI;
+}
+
 void TurnManager::startBattle() {
     while (player.getHP() > 0 && enemy.getHP() > 0) {
         playerTurn();

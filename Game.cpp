@@ -8,6 +8,8 @@ Game::Game(int difficulty)
     turnManager = new TurnManager(player, *enemy, battleSystem);
 }
 
+Game::~Game() {}
+
 void Game::start() {
     storyManager.showStory();
     std::cout << "A random artifact is given before thr battle...\n";

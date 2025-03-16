@@ -7,6 +7,7 @@
 class BattleSystem {
 public:
     BattleSystem(int difficulty);
+    ~BattleSystem() = default;
     Enemy* createEnemy();
 
 private:

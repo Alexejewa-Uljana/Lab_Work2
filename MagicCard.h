@@ -9,6 +9,7 @@ class MagicCard : public Card {
 public:
     MagicCard(int power, int _manaCost);
     MagicCard();
+    ~MagicCard() = default;
     int getManaCost() const;
     void play() override;
     void claimReward(Player& player) override;

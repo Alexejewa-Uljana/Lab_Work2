@@ -7,6 +7,7 @@
 class StoryManager {
 public:
     StoryManager();
+    ~StoryManager() = default;
     void showStory();
     void nextChapter();
     int currentChapter;

@@ -23,7 +23,7 @@ private:
 public:
     TurnManager(Player& player, Enemy& enemy, BattleSystem& battleSystem);
     TurnManager(Player& player, Boss& boss, BattleSystem& battleSystem);
-
+    ~TurnManager();
     void startBattle();
     void playerTurn();
     void enemyTurn();

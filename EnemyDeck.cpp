@@ -3,6 +3,8 @@
 
 EnemyDeck::EnemyDeck() {}
 
+EnemyDeck::~EnemyDeck() {}
+
 void EnemyDeck::addCard(std::unique_ptr<Card> card) {
     deck.push_back(std::move(card));
 }

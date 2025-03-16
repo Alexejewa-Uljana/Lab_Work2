@@ -12,6 +12,7 @@ private:
 
 public:
     SpecialCard(const std::string& name, int power, Effect effect);
+    ~SpecialCard() = default;
     void play() override;
     void claimReward(Player& player) override;
     Effect getEffect() const;

@@ -13,6 +13,7 @@ private:
 
 public:
     StatusEffectCard(const std::string& name, int power, Effect effect);
+    ~StatusEffectCard() = default;
     void play() override;
 
     void claimReward(Player& player) override ;

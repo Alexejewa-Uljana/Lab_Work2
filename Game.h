@@ -10,6 +10,7 @@
 class Game {
 public:
     Game(int difficulty);
+    ~Game();
     void start();
 
 private:

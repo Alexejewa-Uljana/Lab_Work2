@@ -9,6 +9,7 @@ class Boss : public Enemy {
 public:
     Boss();
     Boss(const std::string& _name, int _hp);
+    ~Boss() = default;
     void useSpecialAbility(Player& player);
     void takeTurn(Player& player) override;
     void attack(Player& player, int damage) override;

@@ -11,6 +11,7 @@
 class Deck {
 public:
     Deck();
+    ~Deck() = default; 
     std::unique_ptr<Card> drawCard();
     void display() const;
     void addCard(std::unique_ptr<Card> card);

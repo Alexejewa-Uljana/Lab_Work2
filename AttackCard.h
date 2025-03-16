@@ -10,6 +10,7 @@ class Player;
 class AttackCard : public Card {
 public:
     AttackCard(int power);
+    ~AttackCard() = default;
     void play() override;
     void claimReward(Player& player) override;
     int getAttackPower() const;
