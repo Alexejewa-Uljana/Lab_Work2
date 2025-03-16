@@ -40,4 +40,36 @@ TEST(Player, ManaRestoration) {
     EXPECT_EQ(initialMana + 5, player.getMana());
 }
 
+TEST(PlayerTest, SetAndGetHP) {
+    Player player;
+    player.setHP(40);
+    EXPECT_EQ(player.getHP(), 40);
+}
 
+TEST(PlayerTest, HealTest) {
+    Player player;
+    player.setHP(30);
+    player.heal(10);
+    EXPECT_EQ(player.getHP(), 40);
+
+    player.heal(20);
+    EXPECT_EQ(player.getHP(), 50);
+}
+
+TEST(PlayerTest, TakeDamageTest) {
+    Player player;
+    player.setHP(50);
+    player.takeDamage(20);
+    EXPECT_EQ(player.getHP(), 30);
+    player.takeDamage(30);
+    EXPECT_EQ(player.getHP(), 0);
+}
+
+TEST(PlayerTest, IncreaseAttackPower) {
+    Player player;
+    player.increaseAttackPower(5);
+    EXPECT_EQ(player.getAttackPower(), 10);
+
+    player.increaseAttackPower(-3);
+    EXPECT_EQ(player.getAttackPower(), 7);
+}

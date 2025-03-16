@@ -29,6 +29,14 @@ const int Player::getAttackPower() const {
     return attackPower;
 }
 
+void Player::setStunned(int turns) {
+    stunnedTurns = turns;
+}
+
+const int Player::getStunned() const {
+    return stunnedTurns;
+}
+
 void Player::showHand() const {
     std::cout << "Your current hand:\n";
     for(size_t i = 0; i < hand.size(); ++i) {
@@ -75,10 +83,6 @@ void Player::playCard(int index, Enemy& enemy) {
     enemy.takeDamage(selectedCard->getPower());
     //removeCard(index);
     drawCards();
-}
-
-void Player::setStunned(int turns) {
-    stunnedTurns = turns;
 }
 
 void Player::showDeck() const {

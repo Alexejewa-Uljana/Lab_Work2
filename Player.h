@@ -33,6 +33,7 @@ public:
     const std::vector<std::unique_ptr<Card>>& getHand() const;
     void reduceMana(int amount);
     void setStunned(int turns);
+    const int getStunned() const;
     void removeCard(int index);
     const int getAttackPower() const;
     void drawCards();
