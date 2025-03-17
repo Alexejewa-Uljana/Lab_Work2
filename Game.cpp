@@ -12,6 +12,18 @@ Game::Game(int difficulty) {
        std::cout << "Game initialized with difficulty: " << difficulty << std::endl;
     }
     else if (mode == 2) {
+        if(difficulty == 1) {
+            player.setHP(50);
+            player2.setHP(50);
+        }
+        else if(difficulty == 2) {
+           player.setHP(70);
+           player2.setHP(70);
+        }
+        else {
+            player.setHP(100);
+            player2.setHP(100);
+        }
         battleSystem = new BattleSystem(difficulty);
         turnManager = new TurnManager(player, player2, *battleSystem);
     }

@@ -22,14 +22,22 @@ TurnManager::~TurnManager() {
 }
 
 void TurnManager::startBattle() {
+    int count_turns = 0;
     while (player.getHP() > 0 && ((!isPvP and enemy.getHP()) > 0 || (player2 && player2->getHP() > 0))) {
         if (!isPvP) {
             playerTurn();
+            count_turns++;
+            if(count_turns % 2 == 0) player.restoreMana(5);
             if (enemy.getHP() > 0) {
                 enemyTurn();
             }
         } else {
             pvpTurn();
+            count_turns++;
+           if(count_turns) {
+               player.restoreMana(5);
+               player2->restoreMana(5);
+           }
         }
     }
 
@@ -46,81 +54,131 @@ void TurnManager::pvpTurn() {
         std::cout << ((player.getHP() > 0) ? "Player 1 wins!" : "Player 2 wins!") << std::endl;
         return;
     }
-    std::cout << "It's Player 1's turn!" << std::endl;
-    player.showHand();
-    std::cout << "Select a card to play (enter index): ";
     int cardIndex;
-    std::cin >> cardIndex;
-
-    if (cardIndex >= 0 && cardIndex < player.getHandSize()) {
+    bool stun_mana_1 = false;
+    bool stun_mana_2 = false;
+    bool player_stun = false;
+    bool player2_stun = false;
+    if(player.getStunned() > 0) {
+        std::cout << "1st player is stunned!\n";
+        player.setStunned(player.getStunned() - 1);
+        player_stun = true;
+        stun_mana_1 = true;
+    }
+    else {
+        std::cout << "It's Player 1's turn!" << std::endl;
+        player.showHand();
+        std::cout << "Select a card to play (enter index): ";
+        std::cin >> cardIndex;
+    }
+    if (cardIndex >= 0 && cardIndex < player.getHandSize() && !player_stun) {
         const std::unique_ptr<Card>& selectedCard = player.getHand()[cardIndex];
 
         if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard.get())) {
             std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
             player2->takeDamage(attackCard->getPower());
             player.removeCard(cardIndex);
+            player.drawCards();
         } else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard.get())) {
             std::cout << "You defend with " << defenseCard->getPower() << " defense!" << std::endl;
             player.increaseAttackPower(defenseCard->getPower());
             player.removeCard(cardIndex);
+            player.drawCards();
         } else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
             if (player.getMana() >= magicCard->getManaCost()) {
                 std::cout << "You cast a spell for " << magicCard->getManaCost() << " mana!" << std::endl;
                 player.reduceMana(magicCard->getManaCost());
                 player2->takeDamage(magicCard->getPower());
                 player.removeCard(cardIndex);
-            } else {
-                std::cout << "Not enough mana to cast this spell!" << std::endl;
-                return;
+                player.drawCards();
             }
-        } else {
-            std::cout << "You use Special Card/Status Effect Card!\n";
+            else {
+                std::cout << "Not enough mana to cast this spell!" << std::endl;
+                //return;
+                stun_mana_1 = true;
+              }
+        } else if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
+            std::cout << "Applying status effect: " << statusCard->getName() << "\n";
+                if (statusCard->getEffect().type == "stun") {
+                player2->setStunned(statusCard->getEffect().value);
+            }
+            player.removeCard(cardIndex);
+            player.drawCards();
+        }
+        else {
+            std::cout << "You use Special Card!\n";
             player.playCard(cardIndex, enemy);
             player.removeCard(cardIndex);
+            player.drawCards();
         }
         rewardSystem.giveReward(player);
-        player.drawCards();
-    } else {
+        //player.drawCards();
+        std::cout << "Player 1 HP: " << player.getHP() << ". Player 2 HP: " << player2->getHP() << std::endl;
+    } else if(!stun_mana_1){
         std::cout << "Invalid selection!" << std::endl;
     }
     if (player2->getHP() <= 0) {
         std::cout << "Player 1 wins!" << std::endl;
         return;
     }
-    std::cout << "It's Player 2's turn!" << std::endl;
-    player2->showHand();
-    std::cout << "Select a card to play (enter index): ";
-    std::cin >> cardIndex;
-
-    if (cardIndex >= 0 && cardIndex < player2->getHandSize()) {
+    if(player2->getStunned() > 0) {
+        std::cout << "2nd player is stunned!\n";
+        player2->setStunned(player2->getStunned() - 1);
+        player2_stun = true;
+        stun_mana_2 = true;
+    }
+    else {
+        std::cout << "It's Player 2's turn!" << std::endl;
+        player2->showHand();
+        std::cout << "Select a card to play (enter index): ";
+        std::cin >> cardIndex;
+   }
+    if (cardIndex >= 0 && cardIndex < player2->getHandSize() && !player2_stun) {
         const std::unique_ptr<Card>& selectedCard2 = player2->getHand()[cardIndex];
         if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard2.get())) {
             std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
             player.takeDamage(attackCard->getPower());
             player2->removeCard(cardIndex);
+            player2->drawCards();
         } else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard2.get())) {
             std::cout << "You defend with " << defenseCard->getPower() << " defense!" << std::endl;
             player2->increaseAttackPower(defenseCard->getPower());
             player2->removeCard(cardIndex);
+            player2->drawCards();
         } else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard2.get())) {
             if (player.getMana() >= magicCard->getManaCost()) {
                 std::cout << "You cast a spell for " << magicCard->getManaCost() << " mana!" << std::endl;
                 player2->reduceMana(magicCard->getManaCost());
                 player.takeDamage(magicCard->getPower());
                 player2->removeCard(cardIndex);
+                player2->drawCards();
             } else {
                 std::cout << "Not enough mana to cast this spell!" << std::endl;
-                return;
+                //return;
+                stun_mana_2 = true;
             }
+        } else if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard2.get())) {
+            std::cout << "Applying status effect: " << statusCard->getName() << "\n";
+            if (statusCard->getEffect().type == "stun") {
+                player.setStunned(statusCard->getEffect().value);
+            }
+             player2->removeCard(cardIndex);
+             player2->drawCards();
         } else {
-            std::cout << "You use Special Card/Status Effect Card!\n";
+            std::cout << "You use Special Card!\n";
             player2->playCard(cardIndex, enemy);
             player2->removeCard(cardIndex);
+            player2->drawCards();
         }
-        player2->drawCards();
+        std::cout << "Player 1 HP: " << player.getHP() << ". Player 2 HP: " << player2->getHP() << std::endl;
+        //player2->drawCards();
         rewardSystem.giveReward(*player2);
-    } else {
+    } else if(!stun_mana_2){
         std::cout << "Invalid selection!" << std::endl;
+    }
+    if (player.getHP() <= 0) {
+        std::cout << "Player 2 wins!" << std::endl;
+        return;
     }
 }
 
@@ -161,17 +219,17 @@ void TurnManager::playerTurn() {
     if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard.get())) {
         std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
         enemy.takeDamage(attackCard->getPower());
-        player.removeCard(cardIndex); // Удаляем карту
+        player.removeCard(cardIndex);
     } else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard.get())) {
         std::cout << "You defend with " << defenseCard->getPower() << " defense!" << std::endl;
         player.increaseAttackPower(defenseCard->getPower());
-        player.removeCard(cardIndex); // Удаляем карту
+        player.removeCard(cardIndex);
     } else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
         if (player.getMana() >= magicCard->getManaCost()) {
             std::cout << "You cast a spell for " << magicCard->getManaCost() << " mana!" << std::endl;
             player.reduceMana(magicCard->getManaCost());
             enemy.takeDamage(magicCard->getPower());
-            player.removeCard(cardIndex); // Удаляем карту
+            player.removeCard(cardIndex);
         } else {
             std::cout << "Not enough mana to cast this spell!" << std::endl;
             return;
@@ -179,7 +237,7 @@ void TurnManager::playerTurn() {
     } else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
         std::cout << "You use Special Card/Status Effect Card!\n";
         player.playCard(cardIndex, enemy);
-        player.removeCard(cardIndex); // Удаляем карту
+        player.removeCard(cardIndex);
     } else {
         std::cout << "Unknown card type!" << std::endl;
         return;
