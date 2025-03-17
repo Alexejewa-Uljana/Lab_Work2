@@ -6,21 +6,59 @@
 #include "StatusEffectCard.h"
 #include <iostream>
 
+/**
+ * @brief Constructs a TurnManager for a battle between a player and an enemy.
+ * 
+ * Initializes the TurnManager for a battle scenario where the player fights against an enemy.
+ * 
+ * @param p1 The player participating in the battle.
+ * @param e The enemy participating in the battle.
+ * @param bs The BattleSystem managing the battle mechanics.
+ */
 TurnManager::TurnManager(Player& p1, Enemy& e, BattleSystem& bs)
     : player(p1), enemy(e), battleSystem(bs), turnCounter(0), isPvP(false), player2(nullptr), isBossFight(false), bossAI(nullptr) {}
 
+/**
+ * @brief Constructs a TurnManager for a player versus player battle.
+ * 
+ * Initializes the TurnManager for a PvP battle where two players compete against each other.
+ * 
+ * @param p1 The first player participating in the battle.
+ * @param p2 The second player participating in the battle.
+ * @param bs The BattleSystem managing the battle mechanics.
+ */
 TurnManager::TurnManager(Player& p1, Player& p2, BattleSystem& bs)
     : player(p1), player2(&p2), battleSystem(bs), turnCounter(0), isPvP(true), enemy(*new Enemy()), isBossFight(false), bossAI(nullptr) {}
 
+/**
+ * @brief Constructs a TurnManager for a player versus boss battle.
+ * 
+ * Initializes the TurnManager for a battle between a player and a boss, where the boss has a specialized AI.
+ * 
+ * @param p1 The player participating in the battle.
+ * @param b The boss participating in the battle.
+ * @param bs The BattleSystem managing the battle mechanics.
+ */
 TurnManager::TurnManager(Player& p1, Boss& b, BattleSystem& bs)
     : player(p1), enemy(b), battleSystem(bs), turnCounter(0), isPvP(false), player2(nullptr), isBossFight(true), bossAI(new BossAI(b)) {}
 
+/**
+ * @brief Destructor for the TurnManager.
+ * 
+ * Cleans up any dynamically allocated resources, specifically the BossAI instance if it exists.
+ */
 TurnManager::~TurnManager() {
     if (bossAI) {
         delete bossAI;
     }
 }
 
+/**
+ * @brief Starts the battle between the player and enemy (or player 2 in PvP mode).
+ * 
+ * This method controls the flow of the battle, alternating turns between the player, the enemy, or both players in PvP mode.
+ * It ends when one of the participants' health reaches 0.
+ */
 void TurnManager::startBattle() {
     int count_turns = 0;
     while (player.getHP() > 0 && ((!isPvP and enemy.getHP()) > 0 || (player2 && player2->getHP() > 0))) {
@@ -40,15 +78,21 @@ void TurnManager::startBattle() {
            }
         }
     }
-
+ 
     std::cout << ((player.getHP() > 0) ? "You win!" : "You lost...") << std::endl;
-
+ 
     if (bossAI) {
         delete bossAI;
         bossAI = nullptr;
     }
 }
 
+/**
+ * @brief Handles the turn for Player 1 and Player 2 in a PvP battle.
+ * 
+ * This method alternates turns between Player 1 and Player 2, allowing each player to select and play cards from their hand.
+ * It handles actions such as attack, defense, magic, and status effects.
+ */
 void TurnManager::pvpTurn() {
     if (player.getHP() <= 0 || player2->getHP() <= 0) {
         std::cout << ((player.getHP() > 0) ? "Player 1 wins!" : "Player 2 wins!") << std::endl;
@@ -73,7 +117,7 @@ void TurnManager::pvpTurn() {
     }
     if (cardIndex >= 0 && cardIndex < player.getHandSize() && !player_stun) {
         const std::unique_ptr<Card>& selectedCard = player.getHand()[cardIndex];
-
+ 
         if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard.get())) {
             std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
             player2->takeDamage(attackCard->getPower());
@@ -94,7 +138,6 @@ void TurnManager::pvpTurn() {
             }
             else {
                 std::cout << "Not enough mana to cast this spell!" << std::endl;
-                //return;
                 stun_mana_1 = true;
               }
         } else if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
@@ -112,7 +155,6 @@ void TurnManager::pvpTurn() {
             player.drawCards();
         }
         rewardSystem.giveReward(player);
-        //player.drawCards();
         std::cout << "Player 1 HP: " << player.getHP() << ". Player 2 HP: " << player2->getHP() << std::endl;
     } else if(!stun_mana_1){
         std::cout << "Invalid selection!" << std::endl;
@@ -154,7 +196,6 @@ void TurnManager::pvpTurn() {
                 player2->drawCards();
             } else {
                 std::cout << "Not enough mana to cast this spell!" << std::endl;
-                //return;
                 stun_mana_2 = true;
             }
         } else if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard2.get())) {
@@ -171,7 +212,6 @@ void TurnManager::pvpTurn() {
             player2->drawCards();
         }
         std::cout << "Player 1 HP: " << player.getHP() << ". Player 2 HP: " << player2->getHP() << std::endl;
-        //player2->drawCards();
         rewardSystem.giveReward(*player2);
     } else if(!stun_mana_2){
         std::cout << "Invalid selection!" << std::endl;
@@ -182,6 +222,12 @@ void TurnManager::pvpTurn() {
     }
 }
 
+/**
+ * @brief Executes the enemy's turn during the battle.
+ * 
+ * This method manages the actions performed by the enemy during their turn. It handles 
+ * stun effects and utilizes AI for the enemy's actions.
+ */
 void TurnManager::enemyTurn() {
     std::cout << enemy.getName() << "'s turn.\n";
     if (enemy.isStunned()) {
@@ -197,48 +243,65 @@ void TurnManager::enemyTurn() {
     std::cout << "Player HP: " << player.getHP() << "\n";
 }
 
+/**
+ * @brief Executes the player's turn during the battle.
+ * 
+ * This method allows the player to choose a card to play, performs the selected action, and 
+ * updates the player's stats accordingly. It handles attack, defense, magic, and special cards.
+ */
 void TurnManager::playerTurn() {
     if (player.getHP() <= 0) {
         std::cout << "You lost!" << std::endl;
         return;
     }
-
+ 
     std::cout << "It's your turn!" << std::endl;
     player.showHand();
     std::cout << "Select a card to play (enter index): ";
     int cardIndex;
     std::cin >> cardIndex;
-
+ 
     if (cardIndex < 0 || cardIndex >= player.getHandSize()) {
         std::cout << "Invalid selection!" << std::endl;
         return;
     }
-
+ 
     const std::unique_ptr<Card>& selectedCard = player.getHand()[cardIndex];
-
+ 
     if (auto attackCard = dynamic_cast<AttackCard*>(selectedCard.get())) {
         std::cout << "You attack with " << attackCard->getPower() << " power!" << std::endl;
         enemy.takeDamage(attackCard->getPower());
         player.removeCard(cardIndex);
+        player.drawCards();
     } else if (auto defenseCard = dynamic_cast<DefenseCard*>(selectedCard.get())) {
         std::cout << "You defend with " << defenseCard->getPower() << " defense!" << std::endl;
         player.increaseAttackPower(defenseCard->getPower());
         player.removeCard(cardIndex);
+        player.drawCards();
     } else if (auto magicCard = dynamic_cast<MagicCard*>(selectedCard.get())) {
         if (player.getMana() >= magicCard->getManaCost()) {
             std::cout << "You cast a spell for " << magicCard->getManaCost() << " mana!" << std::endl;
             player.reduceMana(magicCard->getManaCost());
             enemy.takeDamage(magicCard->getPower());
             player.removeCard(cardIndex);
+            player.drawCards();
         } else {
             std::cout << "Not enough mana to cast this spell!" << std::endl;
-            return;
         }
-    } else if (dynamic_cast<SpecialCard*>(selectedCard.get()) || dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
-        std::cout << "You use Special Card/Status Effect Card!\n";
+    } else if (StatusEffectCard* statusCard = dynamic_cast<StatusEffectCard*>(selectedCard.get())) {
+        std::cout << "Applying status effect: " << statusCard->getName() << "\n";
+        if (statusCard->getEffect().type == "stun") {
+            enemy.setStunned(statusCard->getEffect().value);
+        }
+        player.removeCard(cardIndex);
+        player.drawCards();
+    } else if(SpecialCard* speacialCard = dynamic_cast<SpecialCard*>(selectedCard.get())){
+        std::cout << "You use Special Card!\n";
         player.playCard(cardIndex, enemy);
         player.removeCard(cardIndex);
-    } else {
+        player.drawCards();
+    }
+     else {
         std::cout << "Unknown card type!" << std::endl;
         return;
     }
@@ -259,6 +322,13 @@ void TurnManager::playerTurn() {
     rewardSystem.giveReward(player);
 }
 
+
+
+
+/**
+ * @brief Draws a new card for the player.
+ * The player receives a card from their deck.
+ */
 void TurnManager::drawNewCardForPlayer() {
     if (!player.getDeck()) {
         std::cout << "No deck assigned to player!" << std::endl;
@@ -270,11 +340,16 @@ void TurnManager::drawNewCardForPlayer() {
     if (newCard) {
         std::cout << "You drew a new card!" << std::endl;
         player.addCard(std::move(newCard));
-    } else {
+    }
+    else {
         std::cout << "The deck is empty!" << std::endl;
     }
 }
 
+/**
+ * @brief Refills the player's deck with new cards.
+ * Adds new cards to an empty or used deck.
+ */
 void TurnManager::refillDeck() {
     if (!player.getDeck()) {
         std::cout << "No deck assigned to player!" << std::endl;
@@ -283,11 +358,10 @@ void TurnManager::refillDeck() {
 
     auto deck = player.getDeck();
     deck->addCard(std::make_unique<AttackCard>(5));
-    deck->addCard(std::make_unique<AttackCard>(5));
     deck->addCard(std::make_unique<DefenseCard>(5));
     deck->addCard(std::make_unique<MagicCard>(5, 5));
     deck->addCard(std::make_unique<SpecialCard>("Health Card", 0, Effect("heal", 5)));
-    deck->addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("Stun", 2)));
+    deck->addCard(std::make_unique<StatusEffectCard>("Stun Card", 0, Effect("SStun", 2)));
 
     std::cout << "Deck has been refilled with new cards!" << std::endl;
 }

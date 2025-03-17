@@ -60,3 +60,9 @@ TEST(Player, ManaRestoration) {
     player.restoreMana(5);
     EXPECT_EQ(initialMana + 5, player.getMana());
 }
+
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
