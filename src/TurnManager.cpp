@@ -1,10 +1,10 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "TurnManager.h"
-#include "AttackCard.h"
-#include "DefenseCard.h"
-#include "MagicCard.h"
-#include "SpecialCard.h"
-#include "StatusEffectCard.h"
+#include "../include/TurnManager.h"
+#include "../include/AttackCard.h"
+#include "../include/DefenseCard.h"
+#include "../include/MagicCard.h"
+#include "../include/SpecialCard.h"
+#include "../include/StatusEffectCard.h"
 #include <iostream>
 
 /**

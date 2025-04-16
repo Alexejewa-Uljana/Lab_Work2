@@ -1,6 +1,6 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "DefenseCard.h"
-#include "Player.h"
+#include "../include/DefenseCard.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**

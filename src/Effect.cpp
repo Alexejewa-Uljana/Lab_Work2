@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "Effect.h"
+#include "../include/Effect.h"
 #include <iostream>
 
 /**

@@ -1,6 +1,6 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "MagicCard.h"
-#include "Player.h"
+#include "../include/MagicCard.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**

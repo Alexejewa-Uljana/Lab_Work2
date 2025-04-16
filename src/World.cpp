@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "World.h"
+#include "../include/World.h"
 #include <iostream>
 
 /**

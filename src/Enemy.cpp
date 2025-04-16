@@ -1,8 +1,8 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "Enemy.h"
-#include "Player.h"
-#include "EnemyDeck.h"
-#include "AIController.h"
+#include "../include/Enemy.h"
+#include "../include/Player.h"
+#include "../include/EnemyDeck.h"
+#include "../include/AIController.h"
 #include <iostream>
 
 /**

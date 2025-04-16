@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "RewardSystem.h"
+#include "../include/RewardSystem.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

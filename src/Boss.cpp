@@ -1,6 +1,6 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "Boss.h"
-#include "Player.h"
+#include "../include/Boss.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**

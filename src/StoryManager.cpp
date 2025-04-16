@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "StoryManager.h"
+#include "../include/StoryManager.h"
 #include <iostream>
 
 StoryManager::StoryManager() : currentChapter(0) {}

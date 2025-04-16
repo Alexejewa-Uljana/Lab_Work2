@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "StatusEffectCard.h"
+#include "../include/StatusEffectCard.h"
 #include <iostream>
 
 /**

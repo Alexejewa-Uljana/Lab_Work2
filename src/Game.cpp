@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "Game.h"
+#include "../include/Game.h"
 #include <iostream>
 
 Game::Game(int difficulty)

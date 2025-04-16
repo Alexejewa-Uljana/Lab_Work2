@@ -1,6 +1,6 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "AttackCard.h"
-#include "Player.h"
+#include "../include/AttackCard.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**

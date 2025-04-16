@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "BattleSystem.h"
+#include "../include/BattleSystem.h"
 #include <iostream>
 
 /**

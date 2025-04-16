@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "Card.h"
+#include "../include/Card.h"
 
 /**
  * @brief Constructs a Card with a specified name and power.

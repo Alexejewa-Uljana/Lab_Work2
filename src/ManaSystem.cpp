@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "ManaSystem.h"
+#include "../include/ManaSystem.h"
 #include <iostream>
 
 /**
