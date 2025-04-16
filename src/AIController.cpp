@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "AIController.h"
+#include "../include/AIController.h"
 #include <iostream>
 #include <cstdlib>
 
