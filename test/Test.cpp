@@ -1,6 +1,6 @@
 // Алексеева Ульяна st129990@student.spbu.ru
 #include <gtest/gtest.h>
-#include "test_examples.h"
+#include "../include/test_examples.h"
 
 TEST(test_example, add)
 {

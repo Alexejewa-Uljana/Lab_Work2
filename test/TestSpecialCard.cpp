@@ -6,9 +6,9 @@
  */
 
 #include "gtest/gtest.h"
-#include "SpecialCard.h"
-#include "Player.h"
-#include "Effect.h"
+#include "../include/SpecialCard.h"
+#include "../include/Player.h"
+#include "../include/Effect.h"
 
 /**
  * @test SpecialCardConstructor

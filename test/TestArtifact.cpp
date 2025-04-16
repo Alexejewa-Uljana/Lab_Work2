@@ -6,8 +6,8 @@
  */
 
 #include "gtest/gtest.h"
-#include "Artifact.h"
-#include "Player.h"
+#include "../include/Artifact.h"
+#include "../include/Player.h"
 
 /**
  * @test Constructor

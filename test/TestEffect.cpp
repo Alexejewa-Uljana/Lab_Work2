@@ -6,7 +6,7 @@
  */
 
 #include "gtest/gtest.h"
-#include "Effect.h"
+#include "../include/Effect.h"
 
 /**
  * @test DefaultConstructor

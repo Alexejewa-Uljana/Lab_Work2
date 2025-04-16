@@ -6,9 +6,9 @@
  */
 
 #include "gtest/gtest.h"
-#include "StatusEffectCard.h"
-#include "Player.h"
-#include "Effect.h"
+#include "../include/StatusEffectCard.h"
+#include "../include/Player.h"
+#include "../include/Effect.h"
 
 /**
  * @test StatusEffectCardConstructor

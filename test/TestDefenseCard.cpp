@@ -6,8 +6,8 @@
  */
 
 #include "gtest/gtest.h"
-#include "DefenseCard.h"
-#include "Player.h"
+#include "../include/DefenseCard.h"
+#include "../include/Player.h"
 
 /**
  * @test Constructor

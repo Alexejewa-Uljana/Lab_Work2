@@ -6,8 +6,8 @@
  */
 
 #include "gtest/gtest.h"
-#include "MagicCard.h"
-#include "Player.h"
+#include "../include/MagicCard.h"
+#include "../include/Player.h"
 
 /**
  * @brief Tests the constructor of the MagicCard class.

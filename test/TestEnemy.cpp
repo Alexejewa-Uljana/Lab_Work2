@@ -6,10 +6,10 @@
  */
 
 #include "gtest/gtest.h"
-#include "Enemy.h"
-#include "Player.h"
-#include "EnemyDeck.h"
-#include "AIController.h"
+#include "../include/Enemy.h"
+#include "../include/Player.h"
+#include "../include/EnemyDeck.h"
+#include "../include/AIController.h"
 
 /**
  * @test constructor

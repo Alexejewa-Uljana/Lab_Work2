@@ -6,7 +6,7 @@
  */
 
 #include "gtest/gtest.h"
-#include "Boss.h"
+#include "../include/Boss.h"
 
 /**
  * @test constructor
