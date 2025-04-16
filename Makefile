@@ -6,7 +6,7 @@ CXX = g++
 AR = ar
 ARFLAGS = rsv
 
-CXXFLAGS = -Iinclude -std=c++17 -Wall -g -fPIC
+CXXFLAGS = -Iinclude -std=c++17 -Wall -Werror -Wpedantic -g -fPIC
 LDFLAGS = $(CXXFLAGS) -L. -l:$(LIBPROJECT)
 LDGTESTFLAGS = $(LDFLAGS) -lgtest -lgtest_main -lpthread
 

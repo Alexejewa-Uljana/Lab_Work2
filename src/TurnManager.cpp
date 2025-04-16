@@ -9,28 +9,43 @@
 
 /**
  * @brief Constructor for TurnManager in a battle with an enemy.
- * @param p The player.
- * @param e The enemy.
- * @param bs The battle system.
+ * @param player The player.
+ * @param enemy The enemy.
+ * @param battleSystem The battle system.
  */
-TurnManager::TurnManager(Player& p, Enemy& e, BattleSystem& bs)
-    : player(p), enemy(e), battleSystem(bs), isBossFight(false), bossAI(nullptr), turnCounter(0) {}
+TurnManager::TurnManager(Player& player, Enemy& enemy, BattleSystem& battleSystem) :
+    player(player),
+    enemy(enemy),
+    battleSystem(battleSystem),
+    aiController(),
+    bossAI(nullptr),
+    isBossFight(false),
+    rewardSystem(),
+    turnCounter(0)
+{}
 
 /**
  * @brief Constructor for TurnManager in a battle with a boss.
- * @param p The player.
- * @param b The boss.
- * @param bs The battle system.
+ * @param player The player.
+ * @param boss The boss.
+ * @param battleSystem The battle system.
  */
-TurnManager::TurnManager(Player& p, Boss& b, BattleSystem& bs)
-    : player(p), enemy(b), battleSystem(bs), isBossFight(true), turnCounter(0)
+TurnManager::TurnManager(Player& player, Boss& boss, BattleSystem& battleSystem) :
+    player(player),
+    enemy(boss),
+    battleSystem(battleSystem),
+    aiController(),
+    bossAI(new BossAI(boss)),
+    isBossFight(true),
+    rewardSystem(),
+    turnCounter(0)
 {
-    bossAI = new BossAI(b);
+    // Initialization code for boss battle
 }
 
 /**
  * @brief Destructor for TurnManager.
- * Frees memory used by BossAI.
+ * Frees the memory used by BossAI.
  */
 TurnManager::~TurnManager()
 {

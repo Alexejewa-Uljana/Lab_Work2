@@ -8,7 +8,7 @@
 /**
  * @brief Default constructor that initializes an enemy with a name and default health.
  */
-Enemy::Enemy() : hp(30), name("Goblin"), deck(nullptr) {}
+Enemy::Enemy() : name("Goblin"), hp(30), deck(nullptr) {}
 
 /**
  * @brief Constructs an Enemy with a specified name and health.

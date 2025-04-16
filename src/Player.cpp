@@ -343,7 +343,7 @@ void Player::reduceMana(int amount)
  */
 void Player::removeCard(int index)
 {
-    if (index >= 0 and index < hand.size())
+    if (index >= 0 && static_cast<size_t>(index) < hand.size())
     {
         hand.erase(hand.begin() + index);
     }
