@@ -4,9 +4,9 @@
  */
 
 #include "gtest/gtest.h"
-#include "AttackCard.h"
-#include "Player.h"
-#include "Enemy.h"
+#include "../include/AttackCard.h"
+#include "../include/Player.h"
+#include "../include/Enemy.h"
 
 /**
  * @test Constructor

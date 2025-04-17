@@ -4,11 +4,11 @@
  */
 
 #include "gtest/gtest.h"
-#include "Deck.h"
-#include "Card.h"
-#include "AttackCard.h"
-#include "MagicCard.h"
-#include "DefenseCard.h"
+#include "../include/Deck.h"
+#include "../include/Card.h"
+#include "../include/AttackCard.h"
+#include "../include/MagicCard.h"
+#include "../include/DefenseCard.h"
 
 /**
  * @test Constructor

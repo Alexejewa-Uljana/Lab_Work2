@@ -4,10 +4,10 @@
  */
 
 #include "gtest/gtest.h"
-#include "BossAI.h"
-#include "Enemy.h"
-#include "Player.h"
-#include "EnemyDeck.h"
+#include "../incldue/BossAI.h"
+#include "../include/Enemy.h"
+#include "../include/Player.h"
+#include "../include/EnemyDeck.h"
 
 /**
  * @test TakeTurn

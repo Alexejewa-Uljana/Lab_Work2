@@ -4,8 +4,8 @@
  */
 
 #include "gtest/gtest.h"
-#include "Player.h"
-#include "MagicCard.h"
+#include "../includePlayer.h"
+#include "../includeMagicCard.h"
 
 /**
  * @brief Tests adding a card to the player's deck.

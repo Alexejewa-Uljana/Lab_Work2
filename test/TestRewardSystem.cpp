@@ -4,8 +4,8 @@
  */
 
 #include "gtest/gtest.h"
-#include "RewardSystem.h"
-#include "Player.h"
+#include "../include/RewardSystem.h"
+#include "../include/Player.h"
 
 /**
  * @brief Tests if the reward system correctly adds a card to the player's deck.

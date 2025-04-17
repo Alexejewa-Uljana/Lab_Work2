@@ -4,9 +4,9 @@
  */
 
 #include "gtest/gtest.h"
-#include "ManaSystem.h"
-#include "Player.h"
-#include "MagicCard.h"
+#include "../include/ManaSystem.h"
+#include "../include/Player.h"
+#include "../include/MagicCard.h"
 
 /**
  * @brief Tests if the ManaSystem correctly determines if a magic card can be cast when enough mana is available.

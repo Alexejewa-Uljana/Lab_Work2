@@ -4,7 +4,7 @@
  */
 
 #include "gtest/gtest.h"
-#include "StoryManager.h"
+#include "../include/StoryManager.h"
 #include <sstream>
 
 /**

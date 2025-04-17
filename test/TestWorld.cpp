@@ -4,7 +4,7 @@
  */
 
 #include "gtest/gtest.h"
-#include "World.h"
+#include "../include/World.h"
 
 /**
  * @brief Tests the constructor of the World class.
