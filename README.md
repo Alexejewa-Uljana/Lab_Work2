@@ -4,14 +4,22 @@
 
 Алексеева Ульяна st129990@student.spbu.ru
 
-## Description
+## Project Description
+This repository contains a C++ implementation of a Role-Playing Game (RPG) system developed as part of LabWork2. The project features:
 
-LabWork1 contains realization RPG game.
+- Turn-based battle system
+- Card game mechanics
+- AI-controlled enemies
+- Reward system
 
-## Build
+## Building the Project
 
-make
+### Prerequisites
+- GNU Make
+- GCC/G++ (C++17 compatible)
+- Google Test (for test builds)
 
-## Run
-
-./LABWORK2
+### Compilation
+```bash
+make          # Builds main executable (labwork2)
+make test     # Builds test executable (test-labwork2)
