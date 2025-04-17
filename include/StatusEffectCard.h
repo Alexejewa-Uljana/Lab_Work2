@@ -10,10 +10,11 @@
 /**
  * @class StatusEffectCard
  * @brief Represents a card that applies a status effect to an enemy or player.
- * 
+ *
  * StatusEffectCards can apply effects like stun, poison, etc., during the game.
  */
-class StatusEffectCard : public Card {
+class StatusEffectCard : public Card
+{
 
 private:
     Effect effect; /**< The effect associated with the status effect card. */

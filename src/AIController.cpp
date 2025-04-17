@@ -1,10 +1,11 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/AIController.h"
 #include <iostream>
 #include <cstdlib>
 
 /**
  * @brief Default constructor for AIController.
- * 
+ *
  * This constructor initializes the AIController without any specific setup.
  */
 AIController::AIController() {}
@@ -19,10 +20,12 @@ AIController::AIController() {}
  * - Use a card from the enemy's deck
  * - Defend
  */
-void AIController::makeMove(Enemy& enemy, Player& player) {
+void AIController::makeMove(Enemy& enemy, Player& player)
+{
     int action = rand() % 3;  ///< Randomly select an action.
 
-    switch (action) {
+    switch (action)
+    {
     case 0:
         attackPlayer(enemy, player); ///< Attack action.
         break;
@@ -43,13 +46,18 @@ void AIController::makeMove(Enemy& enemy, Player& player) {
  * This method draws a card from the enemy's deck and plays it if available.
  * If no cards are available, an error message is displayed.
  */
-void AIController::useCard(Enemy& enemy, Player& player) {
+void AIController::useCard(Enemy& enemy, Player& player)
+{
     std::cout << enemy.getName() << " attempts to use a card!\n";
-    if (enemy.getDeck()) {
+    if (enemy.getDeck())
+    {
         auto card = enemy.getDeck()->drawCard(); ///< Draw a card from the deck.
-        if (card) {
+        if (card)
+        {
             card->play(); ///< Play the drawn card.
-        } else {
+        }
+        else
+        {
             std::cout << "No cards available in the deck!\n"; ///< Handle case where no cards are available.
         }
     }
@@ -63,11 +71,13 @@ void AIController::useCard(Enemy& enemy, Player& player) {
  * This method reduces the player's health by a fixed amount of damage.
  * If the enemy is stunned, the attack is skipped, and the enemy cannot perform the action.
  */
-void AIController::attackPlayer(Enemy& enemy, Player& player) {
+void AIController::attackPlayer(Enemy& enemy, Player& player)
+{
     std::cout << enemy.getName() << " attacks the player!\n";
     int damage = 10; ///< Fixed damage value.
 
-    if (enemy.isStunned()) { ///< Check if the enemy is stunned.
+    if (enemy.isStunned())   ///< Check if the enemy is stunned.
+    {
         std::cout << enemy.getName() << " is stunned and cannot attack!\n";
         return; ///< If stunned, do not perform the attack.
     }
@@ -82,7 +92,8 @@ void AIController::attackPlayer(Enemy& enemy, Player& player) {
  * This method reduces the damage the enemy takes by increasing its defense.
  * The value of defense is fixed (e.g., 5) and can be modified based on the enemy's characteristics.
  */
-void AIController::defend(Enemy& enemy) {
+void AIController::defend(Enemy& enemy)
+{
     std::cout << enemy.getName() << " defends itself!\n";
     int defenseValue = 5; ///< Fixed defense value.
     enemy.defend(defenseValue); ///< Apply defense to the enemy.
@@ -95,10 +106,14 @@ void AIController::defend(Enemy& enemy) {
  *
  * This method checks if the enemy's HP is below 15. If so, the enemy defends itself; otherwise, it attacks the player.
  */
-void AIController::simpleAI(Enemy& enemy, Player& player) {
-    if (enemy.getHP() < 15) {
+void AIController::simpleAI(Enemy& enemy, Player& player)
+{
+    if (enemy.getHP() < 15)
+    {
         defend(enemy); ///< If HP is low, the enemy defends itself.
-    } else {
+    }
+    else
+    {
         attackPlayer(enemy, player); ///< Otherwise, the enemy attacks the player.
     }
 }

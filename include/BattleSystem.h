@@ -11,7 +11,8 @@
  * The BattleSystem is responsible for creating enemies when a battle begins. It adjusts the enemy's
  * strength and type based on the specified difficulty level (easy, medium, or hard).
  */
-class BattleSystem {
+class BattleSystem
+{
 
 public:
     /**

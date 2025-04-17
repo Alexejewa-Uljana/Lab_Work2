@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/Effect.h"
 #include <iostream>
 
@@ -10,9 +11,10 @@ Effect::Effect(const std::string& t, int v) : type(t), value(v) {}
 
 /**
  * @brief Applies the effect to the game state.
- * 
+ *
  * This method prints out the effect type and value.
  */
-void Effect::applyEffect() {
+void Effect::applyEffect()
+{
     std::cout << "Applying effect: " << type << " with value " << value << "\n";
 }

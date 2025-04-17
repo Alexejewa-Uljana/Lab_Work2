@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestEffect.cpp
  * @brief Contains test cases for the Effect class using Google Test framework.
@@ -9,10 +11,11 @@
 /**
  * @test DefaultConstructor
  * @brief Tests the default constructor of the Effect class.
- * 
+ *
  * Verifies that an Effect object is created with default values for type and value.
  */
-TEST(Effect, DefaultConstructor) {
+TEST(Effect, DefaultConstructor)
+{
     Effect effect;
 
     EXPECT_EQ(effect.type, "none");
@@ -22,10 +25,11 @@ TEST(Effect, DefaultConstructor) {
 /**
  * @test ParameterizedConstructor
  * @brief Tests the parameterized constructor of the Effect class.
- * 
+ *
  * Verifies that an Effect object is created with the correct type and value.
  */
-TEST(Effect, ParameterizedConstructor) {
+TEST(Effect, ParameterizedConstructor)
+{
     Effect effect("stun", 5);
 
     EXPECT_EQ(effect.type, "stun");
@@ -35,10 +39,11 @@ TEST(Effect, ParameterizedConstructor) {
 /**
  * @test ApplyEffectTest
  * @brief Tests the applyEffect function of the Effect class.
- * 
+ *
  * Verifies that applying the effect does not throw any exceptions.
  */
-TEST(Effect, ApplyEffectTest) {
+TEST(Effect, ApplyEffectTest)
+{
     Effect effect("stun", 5);
 
     effect.applyEffect();

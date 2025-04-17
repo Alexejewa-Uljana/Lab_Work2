@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestArtifact.cpp
  * @brief Contains test cases for the Artifact class using Google Test framework.
@@ -10,10 +12,11 @@
 /**
  * @test Constructor
  * @brief Tests the constructor of the Artifact class.
- * 
+ *
  * Verifies that an Artifact object is constructed without any exceptions.
  */
-TEST(Artifact, Constructor) {
+TEST(Artifact, Constructor)
+{
     Artifact artifact;
     ASSERT_NO_THROW(Artifact artifact);
 }
@@ -21,10 +24,11 @@ TEST(Artifact, Constructor) {
 /**
  * @test RandomArtifactEffect
  * @brief Tests the random effect granted by the Artifact class.
- * 
+ *
  * Verifies that granting an artifact to the player changes one of the player's attributes (attack, HP, or mana).
  */
-TEST(Artifact, RandomArtifactEffect) {
+TEST(Artifact, RandomArtifactEffect)
+{
     Player player;
     int initialAttack = player.getAttackPower();
     int initialHP = player.getHP();

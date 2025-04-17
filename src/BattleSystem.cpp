@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/BattleSystem.h"
 #include <iostream>
 
@@ -19,12 +20,18 @@ BattleSystem::BattleSystem(int difficulty) : difficulty(difficulty) {}
  * - Difficulty 2: Returns an Orc with 50 HP.
  * - Difficulty 3: Returns a Dark Lord (Boss) with 100 HP.
  */
-Enemy* BattleSystem::createEnemy() {
-    if (difficulty == 1) {
+Enemy* BattleSystem::createEnemy()
+{
+    if (difficulty == 1)
+    {
         return new Enemy("Goblin", 30);
-    } else if (difficulty == 2) {
+    }
+    else if (difficulty == 2)
+    {
         return new Enemy("Orc", 50);
-    } else {
+    }
+    else
+    {
         return new Boss("Dark Lord", 100);
     }
 }

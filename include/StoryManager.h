@@ -7,10 +7,11 @@
 /**
  * @class StoryManager
  * @brief Manages the story flow in the game.
- * 
+ *
  * This class handles displaying various chapters and the game rules.
  */
-class StoryManager {
+class StoryManager
+{
 
 public:
     /**

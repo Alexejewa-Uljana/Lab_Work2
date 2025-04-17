@@ -11,11 +11,12 @@
 /**
  * @class RewardSystem
  * @brief Handles the reward system for the player.
- * 
- * The RewardSystem class is responsible for giving random rewards to the player. 
+ *
+ * The RewardSystem class is responsible for giving random rewards to the player.
  * Rewards are randomly chosen from a pool of card types.
  */
-class RewardSystem {
+class RewardSystem
+{
 
 public:
 

@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestWorld.cpp
  * @brief Unit tests for the World class.
@@ -9,7 +11,8 @@
 /**
  * @brief Tests the constructor of the World class.
  */
-TEST(World, constructor) {
+TEST(World, constructor)
+{
     World world;
     EXPECT_EQ(1, world.getLevel());
 }
@@ -17,7 +20,8 @@ TEST(World, constructor) {
 /**
  * @brief Tests the load functionality of the World class.
  */
-TEST(World, load) {
+TEST(World, load)
+{
     World world;
     world.load();
     EXPECT_EQ(1, world.getLevel());
@@ -26,7 +30,8 @@ TEST(World, load) {
 /**
  * @brief Tests the getLevel function of the World class.
  */
-TEST(World, getLevel) {
+TEST(World, getLevel)
+{
     World world;
     EXPECT_EQ(1, world.getLevel());
     world.load();

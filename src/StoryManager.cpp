@@ -1,27 +1,33 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/StoryManager.h"
 #include <iostream>
 
 StoryManager::StoryManager() : currentChapter(0) {}
 
-void StoryManager::showStory() {
-    if (currentChapter == 0) {
+void StoryManager::showStory()
+{
+    if (currentChapter == 0)
+    {
         displayIntro();
         displayRules();
         currentChapter++;
     }
 }
 
-void StoryManager::nextChapter() {
+void StoryManager::nextChapter()
+{
     std::cout << "Next chapter of the story...\n";
     currentChapter++;
 }
 
-void StoryManager::displayIntro() {
+void StoryManager::displayIntro()
+{
     std::cout << "Welcome to the Game!\n";
     std::cout << "In this game, you will face challenges and fight enemies!\n";
 }
 
-void StoryManager::displayRules() {
+void StoryManager::displayRules()
+{
     std::cout << "Game Rules:\n";
     std::cout << "1. Each player has HP, Mana, and a deck of cards.\n";
     std::cout << "2. You can play cards to attack, defend, or cast spells.\n";

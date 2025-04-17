@@ -9,10 +9,11 @@
 /**
  * @class SpecialCard
  * @brief Represents a special card with an effect.
- * 
+ *
  * Special cards can have various effects that the player can claim or use during the game.
  */
-class SpecialCard : public Card {
+class SpecialCard : public Card
+{
 
 private:
     Effect effect; /**< The effect associated with the special card. */

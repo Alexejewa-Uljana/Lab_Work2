@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/AttackCard.h"
 #include "../include/Player.h"
 #include <iostream>
@@ -6,7 +7,7 @@
  * @brief Constructs an AttackCard with specified attack power.
  * @param power The attack power of this card.
  *
- * This constructor initializes the AttackCard with the given attack power and passes the card's name 
+ * This constructor initializes the AttackCard with the given attack power and passes the card's name
  * and power to the base class Card.
  */
 AttackCard::AttackCard(int power): Card("Attack Card", power) {}
@@ -17,7 +18,8 @@ AttackCard::AttackCard(int power): Card("Attack Card", power) {}
  * When the AttackCard is played, this method prints a message indicating that the card was used.
  * Additional functionality can be added to affect the game state or the player.
  */
-void AttackCard::play() {
+void AttackCard::play()
+{
     std::cout << "Played an Attack Card!\n";
 }
 
@@ -28,7 +30,8 @@ void AttackCard::play() {
  * This method provides the player with a bonus to their attack power when the card is played.
  * The player will have their attack power increased by a fixed amount.
  */
-void AttackCard::claimReward(Player& player) {
+void AttackCard::claimReward(Player& player)
+{
     std::cout << "You received a bonus to attack power!\n";
     player.increaseAttackPower(5);  ///< Increase the player's attack power by 5.
 }
@@ -39,7 +42,8 @@ void AttackCard::claimReward(Player& player) {
  *
  * This method returns the amount of attack power that the card provides.
  */
-int AttackCard::getAttackPower() const {
+int AttackCard::getAttackPower() const
+{
     return attackPower;
 }
 

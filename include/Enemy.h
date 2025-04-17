@@ -16,10 +16,11 @@ class EnemyDeck;
 /**
  * @class Enemy
  * @brief The Enemy class represents an enemy in the game that can attack, defend, use cards, and take actions during combat.
- * 
+ *
  * The enemy has health, a deck of cards, an AI controller for decision-making, and can take actions such as attacking, defending, or casting spells.
  */
-class Enemy {
+class Enemy
+{
 
 public:
 
@@ -43,7 +44,7 @@ public:
     /**
      * @brief Applies damage to the enemy.
      * @param damage The amount of damage the enemy takes.
-     * 
+     *
      * This method decreases the enemy's health and prints the result.
      */
     void takeDamage(int damage);
@@ -52,7 +53,7 @@ public:
      * @brief The enemy attacks the player.
      * @param player The player being attacked.
      * @param damage The amount of damage dealt by the enemy.
-     * 
+     *
      * This method makes the enemy attack the player with a specified damage value.
      */
     virtual void attack(Player& player, int damage);
@@ -60,7 +61,7 @@ public:
     /**
      * @brief The enemy uses a card from their deck.
      * @param player The player being affected by the card.
-     * 
+     *
      * This method triggers the enemy to use a card from their deck.
      */
     void useCard(Player& player);
@@ -68,7 +69,7 @@ public:
     /**
      * @brief Sets the AI controller for the enemy.
      * @param aiController The AI controller that manages the enemy's actions.
-     * 
+     *
      * This method sets the AI controller that handles the enemy's decision-making.
      */
     void setAIController(AIController* aiController);
@@ -93,7 +94,7 @@ public:
 
     /**
      * @brief Increases the number of turns the enemy is stunned.
-     * 
+     *
      * If the enemy is already stunned, this method reduces the stunned turns.
      */
     void increaseStunnedTurns();
@@ -120,7 +121,7 @@ public:
      * @brief The enemy casts a spell on the player.
      * @param player The player who will be affected by the spell.
      * @param spellDamage The amount of damage dealt by the spell.
-     * 
+     *
      * This method makes the enemy cast a magic spell on the player.
      */
     virtual void castSpell(Player& player, int spellDamage);
@@ -128,7 +129,7 @@ public:
     /**
      * @brief The enemy defends, strengthening its defenses.
      * @param defenseValue The amount of defense added to the enemy.
-     * 
+     *
      * This method increases the enemy's health based on the defense value.
      */
     void defend(int defenseValue);
@@ -136,14 +137,14 @@ public:
     /**
      * @brief The enemy takes its turn and performs an action.
      * @param player The player who is the target of the enemy's action.
-     * 
+     *
      * This method handles the enemy's turn by calling the AI controller to make a move.
      */
     virtual void takeTurn(Player& player);
 
     /**
      * @brief The enemy draws a card from their deck.
-     * 
+     *
      * This method allows the enemy to draw a card from their deck if available.
      */
     void drawCardFromDeck();
@@ -151,7 +152,7 @@ public:
     /**
      * @brief Sets the deck for the enemy.
      * @param newDeck The new deck to assign to the enemy.
-     * 
+     *
      * This method assigns a new deck of cards to the enemy.
      */
     void setDeck(EnemyDeck* newDeck);

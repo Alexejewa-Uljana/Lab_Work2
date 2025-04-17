@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/SpecialCard.h"
 #include "../include/Effect.h"
 #include <iostream>
@@ -13,20 +14,22 @@ SpecialCard::SpecialCard(const std::string& name, int power, Effect effect)
 
 /**
  * @brief Plays the special card.
- * 
+ *
  * This method prints the name of the special card being used.
  */
-void SpecialCard::play() {
+void SpecialCard::play()
+{
     std::cout << "Using special card: " << getName() << "\n";
 }
 
 /**
  * @brief Claims the reward for the special card.
  * @param player The player claiming the reward.
- * 
+ *
  * This method prints a message when the special card's reward is claimed.
  */
-void SpecialCard::claimReward(Player& player) {
+void SpecialCard::claimReward(Player& player)
+{
     std::cout << "Claiming special card reward: " << getName() << "\n";
 }
 
@@ -34,6 +37,7 @@ void SpecialCard::claimReward(Player& player) {
  * @brief Gets the effect of the special card.
  * @return The effect of the special card.
  */
-Effect SpecialCard::getEffect() const {
+Effect SpecialCard::getEffect() const
+{
     return effect;
 }

@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestBoss.cpp
  * @brief Contains test cases for the Boss class using Google Test framework.
@@ -9,10 +11,11 @@
 /**
  * @test constructor
  * @brief Tests the constructor of the Boss class.
- * 
+ *
  * Verifies that a Boss object is created with the correct name and HP.
  */
-TEST(Boss, constructor) {
+TEST(Boss, constructor)
+{
     Boss boss("Dragon", 300);
 
     EXPECT_EQ("Dragon", boss.getName());
@@ -22,10 +25,11 @@ TEST(Boss, constructor) {
 /**
  * @test specialAbility
  * @brief Tests the special ability of the Boss class.
- * 
+ *
  * Verifies that the special ability of the Boss can modify the player's HP correctly.
  */
-TEST(Boss, specialAbility) {
+TEST(Boss, specialAbility)
+{
     Player player;
     Boss boss("Dragon", 300);
 

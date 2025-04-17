@@ -9,10 +9,11 @@
  * @class Artifact
  * @brief The Artifact class manages artifacts that can be granted to a player.
  *
- * The Artifact class provides functionality to grant random artifacts to a player, 
+ * The Artifact class provides functionality to grant random artifacts to a player,
  * such as increasing attack power, restoring health, or restoring mana.
  */
-class Artifact {
+class Artifact
+{
 
 public:
     /**
@@ -25,7 +26,7 @@ public:
     /**
      * @brief Destructor for Artifact.
      *
-     * The destructor cleans up any resources used by the Artifact object. 
+     * The destructor cleans up any resources used by the Artifact object.
      * In this case, no dynamic memory allocation is used, so it is a default destructor.
      */
     ~Artifact() = default;

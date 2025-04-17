@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestBossAI.cpp
  * @brief Contains test cases for the BossAI class using Google Test framework.
@@ -12,10 +14,11 @@
 /**
  * @test TakeTurn
  * @brief Tests the takeTurn function of the BossAI class.
- * 
+ *
  * Verifies that the boss AI can take its turn and interact with the player.
  */
-TEST(BossAITest, TakeTurn) {
+TEST(BossAITest, TakeTurn)
+{
     Boss boss("Dark Lord", 100);
     BossAI bossAI(boss);
     Player player;
@@ -31,10 +34,11 @@ TEST(BossAITest, TakeTurn) {
 /**
  * @test CastSpell
  * @brief Tests the castSpell function of the BossAI class.
- * 
+ *
  * Verifies that the boss AI can cast a spell on the player.
  */
-TEST(BossAITest, CastSpell) {
+TEST(BossAITest, CastSpell)
+{
     Boss boss("Dark Lord", 100);
     BossAI bossAI(boss);
     Player player;
@@ -50,10 +54,11 @@ TEST(BossAITest, CastSpell) {
 /**
  * @test Attack
  * @brief Tests the attack function of the BossAI class.
- * 
+ *
  * Verifies that the boss AI can attack the player.
  */
-TEST(BossAITest, Attack) {
+TEST(BossAITest, Attack)
+{
     Boss boss("Dark Lord", 100);
     BossAI bossAI(boss);
     Player player;

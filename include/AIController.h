@@ -17,7 +17,8 @@ class Enemy;
  * @class AIController
  * @brief Class that controls the AI's actions during the battle.
  */
-class AIController {
+class AIController
+{
 
 public:
     /**

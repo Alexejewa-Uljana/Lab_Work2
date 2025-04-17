@@ -12,17 +12,18 @@ class Deck;
 /**
  * @class Player
  * @brief Represents the player character in the game.
- * 
- * The Player class is responsible for managing the player's deck, hand, health, mana, and attack power. 
+ *
+ * The Player class is responsible for managing the player's deck, hand, health, mana, and attack power.
  * It allows the player to interact with the game world, play cards, heal, and more.
  */
-class Player {
+class Player
+{
 
 public:
 
     /**
      * @brief Default constructor for Player.
-     * 
+     *
      * Initializes the player's health, mana, attack power, and creates an empty deck.
      */
     Player();
@@ -34,7 +35,7 @@ public:
 
     /**
      * @brief Displays the player's current hand of cards.
-     * 
+     *
      * This method prints the player's hand to the console.
      */
     void showHand() const;
@@ -60,7 +61,7 @@ public:
 
     /**
      * @brief Displays the player's deck.
-     * 
+     *
      * This method prints the player's deck to the console.
      */
     void showDeck() const;
@@ -175,7 +176,7 @@ public:
 
     /**
      * @brief Draws cards from the player's deck.
-     * 
+     *
      * This method ensures the player has three cards in hand by drawing from the deck.
      */
     void drawCards();

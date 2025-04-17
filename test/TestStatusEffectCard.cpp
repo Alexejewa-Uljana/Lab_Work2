@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestStatusEffectCard.cpp
  * @brief Unit tests for the StatusEffectCard class functionality.
@@ -11,7 +13,8 @@
 /**
  * @brief Tests the StatusEffectCard constructor and naming.
  */
-TEST(StatusEffectCard, Constructor) {
+TEST(StatusEffectCard, Constructor)
+{
     StatusEffectCard statusEffectCard("Stun Card", 0, Effect("stun", 5));
     EXPECT_EQ(statusEffectCard.getName(), "Stun Card");
 }
@@ -19,7 +22,8 @@ TEST(StatusEffectCard, Constructor) {
 /**
  * @brief Tests the status effect application to enemies.
  */
-TEST(StatusEffectCard, Play) {
+TEST(StatusEffectCard, Play)
+{
     Enemy enemy;
     StatusEffectCard statusEffectCard("Stun Card", 0, Effect("stun", 5));
     enemy.setStunned(statusEffectCard.getEffect().value);

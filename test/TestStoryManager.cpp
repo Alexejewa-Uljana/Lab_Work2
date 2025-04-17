@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestStoryManager.cpp
  * @brief Unit tests for the StoryManager class.
@@ -10,7 +12,8 @@
 /**
  * @brief Tests displaying the introduction of the story.
  */
-TEST(StoryManager, displayIntro) {
+TEST(StoryManager, displayIntro)
+{
     StoryManager storyManager;
     std::ostringstream output;
     std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf()); // Redirect output
@@ -22,7 +25,8 @@ TEST(StoryManager, displayIntro) {
 /**
  * @brief Tests displaying the game rules.
  */
-TEST(StoryManager, displayRules) {
+TEST(StoryManager, displayRules)
+{
     StoryManager storyManager;
     std::ostringstream output;
     std::streambuf* originalCout = std::cout.rdbuf(output.rdbuf());

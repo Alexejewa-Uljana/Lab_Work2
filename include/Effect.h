@@ -6,21 +6,22 @@
 /**
  * @struct Effect
  * @brief The Effect struct represents an effect with a type and a value.
- * 
+ *
  * Effects can be applied to characters or game elements, such as healing or damage.
  */
-struct Effect {
+struct Effect
+{
 
     /**
      * @brief The type of effect (e.g., "heal", "damage").
-     * 
+     *
      * This string represents the effect type, which defines the nature of the effect.
      */
     std::string type;
 
     /**
      * @brief The value of the effect (e.g., amount of healing or damage).
-     * 
+     *
      * This integer represents the magnitude of the effect, such as how much damage or healing to apply.
      */
     int value;
@@ -39,7 +40,7 @@ struct Effect {
 
     /**
      * @brief Applies the effect to a target.
-     * 
+     *
      * This method prints out the effect type and value.
      */
     void applyEffect();

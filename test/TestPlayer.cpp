@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestPlayer.cpp
  * @brief Unit tests for the Player class.
@@ -9,10 +11,11 @@
 
 /**
  * @brief Tests adding a card to the player's deck.
- * 
+ *
  * The deck size should increase after adding a new card.
  */
-TEST(Player, AddCardToDeck) {
+TEST(Player, AddCardToDeck)
+{
     Player player;
     std::unique_ptr<Card> card = std::make_unique<MagicCard>(5, 5);
     player.addCardToDeck(std::move(card));
@@ -22,7 +25,8 @@ TEST(Player, AddCardToDeck) {
 /**
  * @brief Tests the player's ability to draw a card.
  */
-TEST(Player, DrawCard) {
+TEST(Player, DrawCard)
+{
     Player player;
     std::unique_ptr<Card> card = std::make_unique<MagicCard>(5, 5);
     player.addCardToDeck(std::move(card));
@@ -33,7 +37,8 @@ TEST(Player, DrawCard) {
 /**
  * @brief Tests removing a card from the player's deck.
  */
-TEST(Player, RemoveCard) {
+TEST(Player, RemoveCard)
+{
     Player player;
     std::unique_ptr<Card> card = std::make_unique<MagicCard>(5, 5);
     player.addCardToDeck(std::move(card));
@@ -44,7 +49,8 @@ TEST(Player, RemoveCard) {
 /**
  * @brief Tests the player's mana usage.
  */
-TEST(Player, ManaUsage) {
+TEST(Player, ManaUsage)
+{
     Player player;
     int initialMana = player.getMana();
     player.reduceMana(10);
@@ -54,7 +60,8 @@ TEST(Player, ManaUsage) {
 /**
  * @brief Tests the player's mana restoration.
  */
-TEST(Player, ManaRestoration) {
+TEST(Player, ManaRestoration)
+{
     Player player;
     int initialMana = player.getMana();
     player.restoreMana(5);
@@ -62,7 +69,8 @@ TEST(Player, ManaRestoration) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

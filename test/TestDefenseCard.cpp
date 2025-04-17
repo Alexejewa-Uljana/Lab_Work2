@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestDefenseCard.cpp
  * @brief Contains test cases for the DefenseCard class using Google Test framework.
@@ -10,10 +12,11 @@
 /**
  * @test Constructor
  * @brief Tests the constructor of the DefenseCard class.
- * 
+ *
  * Verifies that the DefenseCard is created with the correct name and power.
  */
-TEST(DefenseCard, Constructor) {
+TEST(DefenseCard, Constructor)
+{
     DefenseCard defenseCard(5);
 
     EXPECT_EQ(defenseCard.getName(), "Defense Card");
@@ -23,10 +26,11 @@ TEST(DefenseCard, Constructor) {
 /**
  * @test Play
  * @brief Tests the play function of the DefenseCard class.
- * 
+ *
  * Verifies that playing the DefenseCard heals the player by the correct amount.
  */
-TEST(DefenseCard, Play) {
+TEST(DefenseCard, Play)
+{
     Player player;
     DefenseCard defenseCard(-5);
 

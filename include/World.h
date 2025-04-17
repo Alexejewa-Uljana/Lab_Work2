@@ -6,10 +6,11 @@
 /**
  * @class World
  * @brief Manages the world in the game.
- * 
+ *
  * World manages the current level and world loading.
  */
-class World {
+class World
+{
 
 public:
     /**

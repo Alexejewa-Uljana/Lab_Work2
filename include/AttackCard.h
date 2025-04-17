@@ -9,10 +9,11 @@
  * @class AttackCard
  * @brief The AttackCard class represents an attack card that increases attack power.
  *
- * The AttackCard class is a type of card that, when played, provides a bonus to the player's attack power. 
+ * The AttackCard class is a type of card that, when played, provides a bonus to the player's attack power.
  * It can be played to deal damage or claim a reward that boosts the player's attack power.
  */
-class AttackCard : public Card {
+class AttackCard : public Card
+{
 
 public:
     /**
@@ -24,7 +25,7 @@ public:
     /**
      * @brief Destructor for AttackCard.
      *
-     * The destructor cleans up any resources used by the AttackCard object. 
+     * The destructor cleans up any resources used by the AttackCard object.
      * In this case, no dynamic memory allocation is used, so it is a default destructor.
      */
     ~AttackCard() = default;
@@ -32,7 +33,7 @@ public:
     /**
      * @brief Plays the AttackCard.
      *
-     * This method prints a message indicating that an AttackCard has been played. 
+     * This method prints a message indicating that an AttackCard has been played.
      * It can be extended to affect the game state in the future.
      */
     void play() override;

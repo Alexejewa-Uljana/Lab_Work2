@@ -7,11 +7,12 @@
 /**
  * @class ManaSystem
  * @brief The ManaSystem class manages the player's mana and determines whether they can cast magic cards.
- * 
+ *
  * This class provides methods to check if the player has enough mana to cast a magic card and to reduce the player's mana
  * when a magic card is cast.
  */
-class ManaSystem {
+class ManaSystem
+{
 
 public:
 
@@ -20,7 +21,7 @@ public:
      * @param player The player attempting to cast the magic card.
      * @param magicCard The magic card the player wants to cast.
      * @return true if the player has enough mana to cast the card, false otherwise.
-     * 
+     *
      * This method checks the player's current mana and compares it to the mana cost of the magic card.
      */
     static bool canCastMagicCard(Player& player, MagicCard* magicCard);
@@ -29,7 +30,7 @@ public:
      * @brief Casts a magic card and reduces the player's mana.
      * @param player The player casting the magic card.
      * @param magicCard The magic card to be cast.
-     * 
+     *
      * This method reduces the player's mana based on the mana cost of the magic card.
      * If the player does not have enough mana, an error message is displayed.
      */

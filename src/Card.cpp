@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/Card.h"
 
 /**
@@ -16,7 +17,8 @@ Card::~Card() {}
  * @brief Gets the name of the card.
  * @return The name of the card.
  */
-std::string Card::getName() const {
+std::string Card::getName() const
+{
     return name;
 }
 
@@ -24,6 +26,7 @@ std::string Card::getName() const {
  * @brief Gets the power of the card.
  * @return The power of the card.
  */
-int Card::getPower() const {
+int Card::getPower() const
+{
     return power;
 }

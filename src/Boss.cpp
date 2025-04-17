@@ -1,3 +1,4 @@
+// Алексеева Ульяна st129990@student.spbu.ru
 #include "../include/Boss.h"
 #include "../include/Player.h"
 #include <iostream>
@@ -22,7 +23,8 @@ Boss::Boss(const std::string& _name, int _hp) : Enemy(_name, _hp) {}
  *
  * The special ability deals significant damage (50 damage points) to the player.
  */
-void Boss::useSpecialAbility(Player& player) {
+void Boss::useSpecialAbility(Player& player)
+{
     std::cout << "Boss is using special ability on you!" << std::endl;
     attack(player, 50); // The special ability uses the Boss's attack method to deal 50 damage
 }
@@ -34,8 +36,10 @@ void Boss::useSpecialAbility(Player& player) {
  * The Boss may attack, cast a spell, or use a special ability. The action is chosen randomly.
  * If the Boss is stunned, it cannot take any action.
  */
-void Boss::takeTurn(Player& player) {
-    if (isStunned()) {
+void Boss::takeTurn(Player& player)
+{
+    if (isStunned())
+    {
         std::cout << "Boss is stunned and cannot take action this turn." << std::endl;
         setStunned(getStunnedTurns() - 1); // Decrease the stunned turns
         return;
@@ -43,13 +47,18 @@ void Boss::takeTurn(Player& player) {
 
     int actionChoice = rand() % 3;
 
-    if (actionChoice == 0) {
+    if (actionChoice == 0)
+    {
         std::cout << "Boss attacks!" << std::endl;
         attack(player, 20); // Boss performs a regular attack
-    } else if (actionChoice == 1) {
+    }
+    else if (actionChoice == 1)
+    {
         std::cout << "Boss casts a spell!" << std::endl;
         castSpell(player, 30); // Boss casts a spell
-    } else {
+    }
+    else
+    {
         std::cout << "Boss uses special ability!" << std::endl;
         useSpecialAbility(player); // Boss uses special ability
     }
@@ -62,7 +71,8 @@ void Boss::takeTurn(Player& player) {
  *
  * This function outputs a message indicating the Boss's attack and applies damage to the player.
  */
-void Boss::attack(Player& player, int damage) {
+void Boss::attack(Player& player, int damage)
+{
     std::cout << "Boss attacks you" << " for " << damage << " damage!" << std::endl;
     player.takeDamage(damage); // Apply the damage to the player
 }
@@ -74,7 +84,8 @@ void Boss::attack(Player& player, int damage) {
  *
  * This function outputs a message indicating the Boss's spell and applies damage to the player.
  */
-void Boss::castSpell(Player& player, int spellDamage) {
+void Boss::castSpell(Player& player, int spellDamage)
+{
     std::cout << "Boss casts a spell on you dealing " << spellDamage << " damage!" << std::endl;
     player.takeDamage(spellDamage); // Apply spell damage to the player
 }

@@ -13,7 +13,8 @@
  * that has a special ability and multiple actions in battle. A boss can attack, cast spells,
  * or use its special ability, which is typically stronger than regular attacks.
  */
-class Boss : public Enemy {
+class Boss : public Enemy
+{
 
 public:
     /**

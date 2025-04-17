@@ -6,12 +6,13 @@
 /**
  * @class Card
  * @brief The Card class represents a card that can be used by players or enemies in battle.
- * 
+ *
  * Cards have a name and a power, and they can be played or claimed for their effects in the game.
  */
 class Player;
 
-class Card {
+class Card
+{
 
 public:
 
@@ -41,7 +42,7 @@ public:
 
     /**
      * @brief Plays the card, applying its effect.
-     * 
+     *
      * This method must be implemented by subclasses to define the specific behavior of the card.
      */
     virtual void play() = 0;
@@ -49,7 +50,7 @@ public:
     /**
      * @brief Claims the reward from playing the card.
      * @param player The player receiving the reward.
-     * 
+     *
      * This method must be implemented by subclasses to define the specific reward mechanics.
      */
     virtual void claimReward(Player& player) = 0;

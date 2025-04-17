@@ -1,3 +1,5 @@
+// Алексеева Ульяна st129990@student.spbu.ru
+
 /**
  * @file TestEnemy.cpp
  * @brief Contains test cases for the Enemy class using Google Test framework.
@@ -12,10 +14,11 @@
 /**
  * @test constructor
  * @brief Tests the constructor of the Enemy class.
- * 
+ *
  * Verifies that the Enemy object is created with the correct name and HP.
  */
-TEST(Enemy, constructor) {
+TEST(Enemy, constructor)
+{
     Enemy enemy("Goblin", 100);
 
     EXPECT_EQ("Goblin", enemy.getName());
@@ -25,10 +28,11 @@ TEST(Enemy, constructor) {
 /**
  * @test takeDamage
  * @brief Tests the takeDamage function of the Enemy class.
- * 
+ *
  * Verifies that the Enemy object's HP decreases correctly when damage is taken.
  */
-TEST(Enemy, takeDamage) {
+TEST(Enemy, takeDamage)
+{
     Enemy enemy("Goblin", 100);
 
     enemy.takeDamage(30);
@@ -43,10 +47,11 @@ TEST(Enemy, takeDamage) {
 /**
  * @test attack
  * @brief Tests the attack function of the Enemy class.
- * 
+ *
  * Verifies that the Enemy attacks the player and reduces their HP.
  */
-TEST(Enemy, attack) {
+TEST(Enemy, attack)
+{
     Player player;
     Enemy enemy("Goblin", 100);
     AIController aiController;
@@ -60,10 +65,11 @@ TEST(Enemy, attack) {
 /**
  * @test defend
  * @brief Tests the defend function of the Enemy class.
- * 
+ *
  * Verifies that the Enemy's HP increases when it defends.
  */
-TEST(Enemy, defend) {
+TEST(Enemy, defend)
+{
     Enemy enemy("Goblin", 100);
 
     enemy.defend(20);
@@ -74,10 +80,11 @@ TEST(Enemy, defend) {
 /**
  * @test stun
  * @brief Tests the stun functionality of the Enemy class.
- * 
+ *
  * Verifies that the Enemy can be stunned and that the stun turns decrease as expected.
  */
-TEST(Enemy, stun) {
+TEST(Enemy, stun)
+{
     Enemy enemy("Goblin", 100);
 
     enemy.setStunned(3);
@@ -103,10 +110,11 @@ TEST(Enemy, stun) {
 /**
  * @test castSpell
  * @brief Tests the castSpell function of the Enemy class.
- * 
+ *
  * Verifies that the Enemy casts a spell on the player, decreasing the player's HP.
  */
-TEST(Enemy, castSpell) {
+TEST(Enemy, castSpell)
+{
     Player player;
     Enemy enemy("Goblin", 100);
 
