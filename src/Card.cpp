@@ -1,4 +1,4 @@
-#include "Card.h"
+#include "../include/Card.h"
 
 /**
  * @brief Constructs a Card with a specified name and power.

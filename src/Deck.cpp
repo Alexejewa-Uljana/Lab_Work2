@@ -1,11 +1,11 @@
-#include "Deck.h"
+#include "../include/Deck.h"
 #include <iostream>
 #include <cstdlib>
-#include "AttackCard.h"
-#include "DefenseCard.h"
-#include "MagicCard.h"
-#include "StatusEffectCard.h"
-#include "SpecialCard.h"
+#include "../include/AttackCard.h"
+#include "../include/DefenseCard.h"
+#include "../include/MagicCard.h"
+#include "../include/StatusEffectCard.h"
+#include "../include/SpecialCard.h"
 
 /**
  * @brief Constructs a Deck and initializes it with a variety of cards.

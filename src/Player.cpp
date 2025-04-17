@@ -1,10 +1,10 @@
-#include "Player.h"
+#include "../include/Player.h"
 #include <iostream>
-#include "ManaSystem.h"
-#include "StatusEffectCard.h"
-#include "SpecialCard.h"
-#include "Deck.h"
-#include "Enemy.h"
+#include "../include/ManaSystem.h"
+#include "../include/StatusEffectCard.h"
+#include "../include/SpecialCard.h"
+#include "../include/Deck.h"
+#include "../include/Enemy.h"
 
 /**
  * @brief Default constructor for the Player class.

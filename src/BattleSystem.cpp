@@ -1,4 +1,4 @@
-#include "BattleSystem.h"
+#include "../include/BattleSystem.h"
 #include <iostream>
 
 /**

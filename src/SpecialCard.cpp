@@ -1,5 +1,5 @@
-#include "SpecialCard.h"
-#include "Effect.h"
+#include "../include/SpecialCard.h"
+#include "../include/Effect.h"
 #include <iostream>
 
 /**

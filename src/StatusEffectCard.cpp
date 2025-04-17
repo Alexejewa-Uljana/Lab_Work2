@@ -1,4 +1,4 @@
-#include "StatusEffectCard.h"
+#include "../include/StatusEffectCard.h"
 #include <iostream>
 
 /**

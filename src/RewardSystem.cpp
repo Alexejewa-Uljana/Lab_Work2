@@ -1,4 +1,4 @@
-#include "RewardSystem.h"
+#include "../include/RewardSystem.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

@@ -1,4 +1,4 @@
-#include "StoryManager.h"
+#include "../include/StoryManager.h"
 #include <iostream>
 
 StoryManager::StoryManager() : currentChapter(0) {}

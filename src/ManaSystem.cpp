@@ -1,4 +1,4 @@
-#include "ManaSystem.h"
+#include "../include/ManaSystem.h"
 #include <iostream>
 
 /**

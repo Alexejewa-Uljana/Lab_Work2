@@ -1,4 +1,4 @@
-#include "Artifact.h"
+#include "../include/Artifact.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

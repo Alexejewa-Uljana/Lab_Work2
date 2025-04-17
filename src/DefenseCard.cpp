@@ -1,5 +1,5 @@
-#include "DefenseCard.h"
-#include "Player.h"
+#include "../include/DefenseCard.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**

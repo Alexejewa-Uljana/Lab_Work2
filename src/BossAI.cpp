@@ -1,5 +1,5 @@
-#include "BossAI.h"
-#include "Player.h"
+#include "../include/BossAI.h"
+#include "../include/Player.h"
 #include <iostream>
 
 /**
