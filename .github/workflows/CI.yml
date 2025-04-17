@@ -43,4 +43,4 @@ jobs:
         run: make test
 
       - name: Run Tests
-        run: ./test-LABWORK2
+        run: ./test-labwork2
