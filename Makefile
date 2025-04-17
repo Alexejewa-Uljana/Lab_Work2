@@ -1,50 +1,58 @@
-PROJECT = LABWORK2
-
+PROJECT = labwork2
 LIBPROJECT = $(PROJECT).a
-
 TESTPROJECT = test-$(PROJECT)
 
 CXX = g++
+AR = ar
+ARFLAGS = rsv
 
-A = ar
+CXXFLAGS = -Iinclude -std=c++17 -Wall -Werror -Wpedantic -g -fPIC
+LDFLAGS = $(CXXFLAGS) -L. -l:$(LIBPROJECT)
+LDGTESTFLAGS = $(LDFLAGS) -lgtest -lgtest_main -lpthread
 
-AFLAGS = rsv
+DEPS = $(wildcard include/*.h)
 
-CCXFLAGS = -I. -std=c++17 -Wall -g -fPIC
+SRC_DIR = src
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(addprefix obj/,$(notdir $(SRCS:.cpp=.o)))
 
-LDXXFLAGS = $(CCXFLAGS) -L. -l:$(LIBPROJECT)
+TEST_DIR = test
+TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
+TEST_OBJ = $(addprefix obj/,$(notdir $(TEST_SRCS:.cpp=.o)))
 
-LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
+MAIN_OBJ = obj/main.o
 
-DEPS=$(wildcard *.h)
+.PHONY: default all clean cleanall test
 
-OBJ=main.o
+default: all
 
-TEST-OBJ=Test.o
+obj/:
+	mkdir -p obj
 
-.PHONY: default
+obj/%.o: $(SRC_DIR)/%.cpp $(DEPS) | obj/
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-default: all;
+obj/%.o: $(TEST_DIR)/%.cpp $(DEPS) | obj/
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.cpp $(DEPS)
+obj/main.o: main.cpp $(DEPS) | obj/
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(LIBPROJECT): $(OBJ)
-	$(A) $(AFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $@ $^
 
-$(PROJECT): main.o $(LIBPROJECT)
-	$(CXX) -o $@ main.o $(LDXXFLAGS)
+$(PROJECT): $(MAIN_OBJ) $(LIBPROJECT)
+	$(CXX) -o $@ $(MAIN_OBJ) $(LDFLAGS)
 
 test: $(TESTPROJECT)
 
-$(TESTPROJECT): $(LIBPROJECT) $(TEST-OBJ)
-	$(CXX) -o $@ $(TEST-OBJ) $(LDGTESTFLAGS)
+$(TESTPROJECT): $(LIBPROJECT) $(TEST_OBJ)
+	$(CXX) -o $@ $(TEST_OBJ) $(LDGTESTFLAGS)
 
 all: $(PROJECT) test
 
-.PHONY: clean
-
 clean:
+	rm -rf obj
 	rm -f *.o
 
 cleanall: clean

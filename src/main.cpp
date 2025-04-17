@@ -1,5 +1,5 @@
 // Алексеева Ульяна st129990@student.spbu.ru
-#include "include/Game.h"
+#include "Game.h"
 #include <iostream>
 
 /**

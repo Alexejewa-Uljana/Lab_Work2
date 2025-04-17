@@ -1,0 +1,46 @@
+# Project identification
+PROJECT_NAME           = "LabWork2"
+PROJECT_BRIEF          = "RPG Game Project Documentation"
+PROJECT_LOGO           = ""
+OUTPUT_DIRECTORY       = docs
+
+# Input configuration
+INPUT                  = include src test
+FILE_PATTERNS          = *.h *.hpp *.cpp
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = 
+
+# Output formats
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+
+# Documentation extraction
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_METHODS  = YES
+
+# Source code display
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# Diagram settings
+HAVE_DOT               = YES
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Path configuration
+INCLUDE_PATH           = include
+STRIP_FROM_PATH        = include/ src/ test/
+
+# Optimization
+ALPHABETICAL_INDEX     = YES
+COLS_IN_ALPHA_INDEX    = 3
+
+# Build configuration
+GENERATE_TREEVIEW      = YES
+FULL_PATH_NAMES        = NO
