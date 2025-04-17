@@ -1,8 +1,18 @@
-//Алексеева Ульяна st129990@student.spbu.ru
-#include "iostream"
-#include "test_examples.h"
-#include "vector"
+#include "../include/Game.h"
+#include <iostream>
 
-int main(int argc, char* argv []){
+/**
+ * @brief The entry point for the game.
+ * Prompts the user to select a difficulty level and starts the game.
+ */
+int main() {
+    int difficulty;
+    std::cout << "Choose difficulty (1 - easy, 2 - normal, 3 - boss fight): ";
+    std::cin >> difficulty;
+    if(difficulty != 1 and difficulty != 2 and difficulty != 3) difficulty = 1;
+    std::cout << difficulty << std::endl;
+    Game game(difficulty);
+    game.start();
+
     return 0;
 }
